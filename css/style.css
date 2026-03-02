@@ -98,7 +98,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2.5rem 0;
+  padding: 1rem 0;
   position: sticky;
   top: 1.5rem;
   height: calc(100vh - 3rem);
@@ -120,7 +120,7 @@ a {
 .nav-links {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
   width: 100%;
   align-items: center;
 }
@@ -196,12 +196,12 @@ header {
 }
 header h1 {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: bold;
 }
 header h2 {
   font-size: 1.5rem;
   color: var(--accent-text);
-  font-weight: 700;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
@@ -215,7 +215,7 @@ header h2 {
 
 .card {
   border-radius: var(--radius);
-  padding: 1.8rem;
+  padding: 1.5rem;
   box-shadow: var(--shadow);
   display: flex;
   flex-direction: column;
@@ -228,21 +228,26 @@ header h2 {
 }
 .card h3 {
   font-size: 1.35rem;
-  font-weight: 800;
+  font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 0.8rem;
-  padding-bottom: 0.6rem;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid currentColor;
 }
 .card h4 {
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: bold;
   font-variant: small-caps;
   margin-bottom: 0.5rem;
 }
 .card p,
 .card li {
   margin-bottom: 0.5rem;
+}
+
+.card > :last-child,
+ul > :last-child {
+  margin-bottom: 0;
 }
 
 /* VARIANTES C1, C2, C3 */
@@ -393,7 +398,7 @@ input[type="submit"] {
   border: none;
   border-radius: var(--radius);
   cursor: pointer;
-  font-weight: 800;
+  font-weight: bold;
   text-transform: uppercase;
 }
 
@@ -502,7 +507,7 @@ footer a {
   width: 100%;
   margin-top: 1rem;
   cursor: pointer;
-  font-weight: 800;
+  font-weight: bold;
 }
 
 /* --- RESPONSIVE --- */
