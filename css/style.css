@@ -331,11 +331,11 @@ ul > :last-child {
 .split-content {
   height: 100%;
   display: flex;
-  flex-wrap: wrap;
   gap: var(--gap);
 }
-.split-content > div {
-  flex: 1 1 18rem;
+.split-content > div,
+.split-content > ul {
+  flex: 1;
   min-width: 0;
 }
 .profile-layout {
@@ -555,6 +555,12 @@ footer a {
   }
   .cols-2 {
     grid-template-columns: 1fr;
+  }
+  .split-content {
+    flex-direction: column;
+  }
+  .split-content:has(ul) {
+    gap: 0.5rem;
   }
   footer {
     flex-direction: column;
