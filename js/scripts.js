@@ -2,12 +2,12 @@
 
 /* --- GESTION DES COOKIES --- */
 function fcookie() {
-  // Ne pas afficher si déjà accepté (variable PHP ou cookie présent)
   if (
     window.cookieAccepted === true ||
     (document.cookie && document.cookie.includes("__Secure-cookieDef"))
-  )
+  ) {
     return;
+  }
 
   const cookieEl = document.querySelector("#cookie");
   if (!cookieEl) return;
@@ -19,10 +19,17 @@ function fcookie() {
   const acceptBtn = document.querySelector("#cookie-button");
   if (acceptBtn) {
     acceptBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Empêche le saut de page immédiat
       cookieEl.classList.remove("show");
+
+      // Écriture du cookie (durée : 13 mois / conforme CNIL)
+      const maxAge = 60 * 60 * 24 * 395;
+      document.cookie = `__Secure-cookieDef=accepted; max-age=${maxAge}; path=/; SameSite=Lax; Secure`;
+      window.cookieAccepted = true;
+
       const href =
         acceptBtn.getAttribute("href") || acceptBtn.dataset.acceptUrl;
-      if (href) {
+      if (href && href !== "#") {
         window.location.href = href;
       }
     });
