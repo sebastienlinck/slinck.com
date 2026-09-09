@@ -2,36 +2,32 @@
 
 /* --- GESTION DES COOKIES --- */
 function fcookie() {
+  // Si le cookie est présent, on ne montre pas la bannière
   if (
-    window.cookieAccepted === true ||
-    (document.cookie && document.cookie.includes("__Secure-cookieDef"))
+    document.cookie &&
+    document.cookie.indexOf("cookieDefAccepted=1") !== -1
   ) {
+    //console.log("fcookie: cookieDefAccepted trouvé, rien à faire");
     return;
   }
+  // Debug: afficher les cookies au chargement
+  //console.log("fcookie: cookies on load ->", document.cookie);
 
   const cookieEl = document.querySelector("#cookie");
   if (!cookieEl) return;
 
-  setTimeout(() => {
-    cookieEl.classList.add("show");
-  }, 1000);
+  // Afficher la bannière après 1s
+  setTimeout(() => cookieEl.classList.add("show"), 1000);
 
   const acceptBtn = document.querySelector("#cookie-button");
   if (acceptBtn) {
-    acceptBtn.addEventListener("click", (e) => {
-      e.preventDefault(); // Empêche le saut de page immédiat
+    acceptBtn.addEventListener("click", () => {
+      // Écriture du cookie côté client (1 an)
+      const maxAge = 60 * 60 * 24 * 365;
+      document.cookie = `cookieDefAccepted=1; max-age=${maxAge}; path=/; SameSite=Lax`;
+      console.log("fcookie: cookie after set ->", document.cookie);
       cookieEl.classList.remove("show");
-
-      // Écriture du cookie (durée : 13 mois / conforme CNIL)
-      const maxAge = 60 * 60 * 24 * 395;
-      document.cookie = `__Secure-cookieDef=accepted; max-age=${maxAge}; path=/; SameSite=Lax; Secure`;
       window.cookieAccepted = true;
-
-      const href =
-        acceptBtn.getAttribute("href") || acceptBtn.dataset.acceptUrl;
-      if (href && href !== "#") {
-        window.location.href = href;
-      }
     });
   }
 }
@@ -86,7 +82,8 @@ function showStatusMessage(message, type, container) {
 
   // Utilisation des variables de couleurs définies dans votre thème
   const bgColor = type === "success" ? "var(--deep-purple)" : "var(--magenta)";
-  const textColor = type === "success" ? "var(--soft-purple)" : "var(--soft-pink)";
+  const textColor =
+    type === "success" ? "var(--soft-purple)" : "var(--soft-pink)";
 
   container.innerHTML = `
     <div style="padding: 1rem; border-radius: var(--radius); margin-bottom: 1rem; 

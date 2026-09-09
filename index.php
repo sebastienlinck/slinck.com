@@ -3,29 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', FALSE);
 
 // --- GESTION SESSION &amp; COOKIES ---
-session_set_cookie_params([
-	'samesite' => 'Strict',
-	'secure' => true,
-	'httponly' => true,
-]);
-
-$cookie_name = "__Secure-cookieDef";
-$cookie_accepted = isset($_COOKIE[$cookie_name]);
-
-// Gestion de l'acceptation via URL
-if (isset($_GET['accept_cookies']) && $_GET['accept_cookies'] == 'true' && !$cookie_accepted) {
-	$expiration_time = time() + (60 * 60 * 24 * 180); // 180 jours
-	setcookie($cookie_name, 'accepted', [
-		'expires' => $expiration_time,
-		'path' => '/',
-		'secure' => true,
-		'httponly' => true,
-		'samesite' => 'Strict'
-	]);
-	// Redirection propre pour nettoyer l'URL
-	header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
-	exit();
-}
+// Gestion des cookies déplacée entièrement côté client (JS)
 
 $host = $_SERVER['HTTP_HOST'] ?? 'slinck.com';
 $host = preg_replace('/[^a-z0-9\.\-:]/i', '', $host);
@@ -107,6 +85,7 @@ $canonicalPage = $page !== 'accueil' ? '/' . htmlspecialchars($page, ENT_QUOTES,
 	<link rel="canonical" href="<?= 'https://' . $host . $canonicalPage; ?>">
 	<link rel="manifest" href="./slinck.webmanifest">
 	<link rel="icon" type="image/svg" sizes="256x256" href="./img/favicon.svg">
+
 	<meta name="theme-color" content="#0A1F44">
 	<meta property="og:title" content="Sébastien Linck – Enseignant en sciences du numérique | EiSINe">
 	<meta property="og:description" content="Site web de Sébastien Linck, enseignant à l’École d’ingénieurs en Sciences Industrielles et Numérique (EiSINe) : formations, enseignements et travaux de recherche.">
@@ -135,9 +114,6 @@ $canonicalPage = $page !== 'accueil' ? '/' . htmlspecialchars($page, ENT_QUOTES,
 				document.documentElement.setAttribute('data-theme', 'dark');
 			}
 		})();
-	</script>
-	<script>
-		window.cookieAccepted = <?= $cookie_accepted ? 'true' : 'false' ?>;
 	</script>
 </head>
 
@@ -190,14 +166,12 @@ $canonicalPage = $page !== 'accueil' ? '/' . htmlspecialchars($page, ENT_QUOTES,
 		</main>
 	</div>
 
-	<?php if (!$cookie_accepted): ?>
-		<section id="cookie">
-			<h3>Cookies &amp; Confidentialité</h3>
-			<p>Ce site utilise des cookies pour assurer son bon fonctionnement.</p>
-			<button id="cookie-button" type="button" data-accept-url="?accept_cookies=true">J'ai compris</button>
-		</section>
-	<?php endif; ?>
-	<script src="./js/scripts.min.js"></script>
+	<section id="cookie">
+		<h3>Cookies &amp; Confidentialité</h3>
+		<p>Ce site utilise des cookies pour assurer son bon fonctionnement.</p>
+		<button id="cookie-button" type="button">J'ai compris</button>
+	</section>
+	<script src="./js/scripts.min.js?v=<?= @filemtime('./js/scripts.min.js') ?>"></script>
 	<script>
 		if (typeof navigator.serviceWorker !== 'undefined') {
 			navigator.serviceWorker.register('sw.js');

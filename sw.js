@@ -1,4 +1,5 @@
-const CACHE = "pwabuilder-offline";
+// Bump cache name to force renewal when SW changes
+const CACHE = "pwabuilder-offline-v2";
 
 // On essaie de charger Workbox
 importScripts(
