@@ -568,3 +568,20 @@ footer a {
     gap: 0.5rem;
   }
 }
+
+/* --- Messages du formulaire (étape contact) --- */
+.alerte {
+  padding: 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: bold;
+}
+.alerte-ok {
+  background: var(--deep-purple);
+  color: var(--soft-purple);
+}
+.alerte-erreur {
+  background: var(--magenta);
+  color: var(--soft-pink);
+}

@@ -1,4 +1,4 @@
-Sitemap: http://www.slinck.com/sitemap.xml
-
 User-agent: *
 Disallow: /articles/
+
+Sitemap: https://www.slinck.com/sitemap.xml

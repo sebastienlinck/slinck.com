@@ -1,182 +1,209 @@
 <?php
+
+/**
+ * Routeur + gabarit du site.
+ * 1. Chaque page est un fichier de pages/ (logique PHP en haut, contenu HTML en dessous).
+ * 2. La page est exécutée AVANT l'affichage du gabarit : elle peut donc rediriger (header + exit).
+ * 3. Ajouter une page = une ligne dans $pages + un fichier dans pages/.
+ */
+ini_set('display_errors', '0');
 error_reporting(E_ALL);
-ini_set('display_errors', FALSE);
 
-// --- GESTION SESSION &amp; COOKIES ---
-// Gestion des cookies déplacée entièrement côté client (JS)
+const SITE = 'https://www.slinck.com';
 
-$host = $_SERVER['HTTP_HOST'] ?? 'slinck.com';
-$host = preg_replace('/[^a-z0-9\.\-:]/i', '', $host);
+// ---------------------------------------------------------------------------
+// 1. Les pages : slug => infos. 'menu' = libellé dans la navigation (null = pas dans le menu)
+// ---------------------------------------------------------------------------
+$pages = [
+	'accueil' => [
+		'title' => 'Sébastien Linck – Enseignant & responsable de formation (EiSINe)',
+		'h1'    => 'Sébastien Linck',
+		'h2'    => 'Enseignant & Responsable de formation',
+		'desc'  => "Sébastien Linck, enseignant en informatique et responsable de la Licence Pro Métiers du Numérique à l'EiSINe (Charleville-Mézières).",
+		'menu'  => 'Accueil',
+		'icon'  => 'home',
+	],
+	'enseignements' => [
+		'title' => 'Enseignements – Sébastien Linck',
+		'h1'    => 'Enseignements',
+		'h2'    => 'Modules pédagogiques détaillés',
+		'desc'  => "Modules enseignés par Sébastien Linck : développement web, SEO, PWA, réseaux et sécurité, de la licence aux écoles d'ingénieurs.",
+		'menu'  => 'Cours',
+		'icon'  => 'lesson',
+	],
+	'recherche' => [
+		'title' => 'Recherche – Sébastien Linck',
+		'h1'    => 'Recherche',
+		'h2'    => 'Réseaux, Mobilité & Innovation Pédagogique',
+		'desc'  => "Travaux de recherche de Sébastien Linck : réseaux hétérogènes, EIAH et projet AlgoPath, un serious game 3D pour apprendre l'algorithmique.",
+		'menu'  => 'Recherche',
+		'icon'  => 'network-analytic',
+	],
+	'publications' => [
+		'title' => 'Publications – Sébastien Linck',
+		'h1'    => 'Publications',
+		'h2'    => 'Articles, Conférences & Thèse',
+		'desc'  => 'Articles de revues, conférences internationales et thèse de doctorat de Sébastien Linck, avec liens PDF.',
+		'menu'  => 'Publi',
+		'icon'  => 'books',
+	],
+	'contact' => [
+		'title' => 'Contact et admissions – Sébastien Linck',
+		'h1'    => 'Contact',
+		'h2'    => 'Coordonnées, admissions & formulaire',
+		'desc'  => "Contacter Sébastien Linck et s'informer sur la Licence Pro Métiers du Numérique : admissions, alternance, formation continue.",
+		'menu'  => 'Contact',
+		'icon'  => 'envelope',
+	],
+	'mentions-legales' => [
+		'title' => 'Mentions légales – Sébastien Linck',
+		'h1'    => 'Mentions légales',
+		'h2'    => 'Informations juridiques & CGU',
+		'desc'  => 'Mentions légales, conditions d\'utilisation et données personnelles du site slinck.com.',
+		'menu'  => null,
+	],
+];
 
-// --- ROUTING ---
-$auth_pages = array(
-	'accueil' => array(
-		'url' => './views/accueil.html',
-		'nom' => 'Site personnel',
-		'titre_h1' => 'Sébastien Linck',
-		'sous_titre' => 'Enseignant &amp; Responsable de formation'
-	),
-	'enseignements' => array(
-		'url' => './views/enseignements.html',
-		'nom' => 'Enseignements',
-		'titre_h1' => 'Enseignements',
-		'sous_titre' => 'Modules pédagogiques détaillés'
-	),
-	'recherche' => array(
-		'url' => './views/recherche.html',
-		'nom' => 'Recherche',
-		'titre_h1' => 'Recherche',
-		'sous_titre' => 'Réseaux, Mobilité &amp; Innovation Pédagogique'
-	),
-	'publications' => array(
-		'url' => './views/publications.html',
-		'nom' => 'Publications',
-		'titre_h1' => 'Publications',
-		'sous_titre' => 'Articles, Conférences &amp; Thèse'
-	),
-	'contact' => array(
-		'url' => './views/contact.html',
-		'nom' => 'Contact',
-		'titre_h1' => 'Contact',
-		'sous_titre' => 'Coordonnées &amp; Formulaire'
-	),
-	'mentions-legales' => array(
-		'url' => './views/mentions-legales.html',
-		'nom' => 'Mentions légales',
-		'titre_h1' => 'Mentions Légales',
-		'sous_titre' => 'Informations juridiques &amp; CGU'
-	),
-	'erreur' => array(
-		'url' => './views/erreur.html',
-		'nom' => 'Erreur',
-		'titre_h1' => 'Erreur 404',
-		'sous_titre' => 'Page introuvable'
-	)
-);
+// Page affichée quand l'adresse n'existe pas (hors du tableau : /erreur n'est pas une vraie page)
+$erreur = [
+	'title' => 'Page introuvable – Sébastien Linck',
+	'h1'    => 'Erreur 404',
+	'h2'    => 'Page introuvable',
+	'desc'  => 'Page introuvable.',
+	'menu'  => null,
+];
 
-// Détection de la page
-if (!isset($_GET['page'])) {
-	$page = 'accueil';
-	$is404 = false;
-} elseif (array_key_exists($_GET['page'], $auth_pages)) {
-	$page = $_GET['page'];
-	$is404 = false;
-} else {
-	$page = 'erreur';
-	$is404 = true;
+// ---------------------------------------------------------------------------
+// 2. Quelle page ? (aucun risque d'inclusion : on ne garde que les slugs connus)
+// ---------------------------------------------------------------------------
+$brut = (isset($_GET['page']) && is_string($_GET['page'])) ? $_GET['page'] : '';
+$slug = trim($brut, '/');
+
+if ($slug === '') {
+	$slug = 'accueil';
 }
 
-if ($is404) {
+if (isset($pages[$slug])) {
+	$page = $pages[$slug];
+	// Une seule adresse par page : /accueil, /contact/ ... redirigent vers l'adresse officielle
+	$officielle = ($slug === 'accueil') ? '/' : '/' . $slug;
+	if ($brut !== '' && $brut !== ltrim($officielle, '/')) {
+		header('Location: ' . $officielle, true, 301);
+		exit;
+	}
+} else {
+	$slug = 'erreur';
+	$page = $erreur;
 	http_response_code(404);
 }
 
-$canonicalPage = $page !== 'accueil' ? '/' . htmlspecialchars($page, ENT_QUOTES, 'UTF-8') : '';
+$canonical = SITE . (($slug === 'accueil' || $slug === 'erreur') ? '/' : '/' . $slug);
+$fichier   = __DIR__ . '/pages/' . $slug . '.php';
+
+// ---------------------------------------------------------------------------
+// 3. On exécute la page dans un tampon (elle peut rediriger), puis on affiche le gabarit
+// ---------------------------------------------------------------------------
+ob_start();
+require $fichier;
+$contenu = ob_get_clean();
+
+// Date de « mise à jour » = dernière modification du fichier de la page
+$mois = ['', 'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+$ts   = @filemtime($fichier) ?: time();
+$maj  = $mois[(int) date('n', $ts)] . ' ' . date('Y', $ts);
+
+function h(string $s): string
+{
+	return htmlspecialchars($s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); // SUBSTITUTE : un octet invalide ne vide plus toute la chaîne
+}
 ?>
 <!doctype html>
-<html lang="fr" data-theme="light">
+<html lang="fr" data-theme="dark">
 
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Sébastien Linck - <?= $auth_pages[$page]['sous_titre'] ?></title>
-	<meta name="keywords" content="Sébastien Linck, Enseignant Informatique URCA, Responsable Licence Pro Web, Métiers du Numérique, EiSINe, Développement Front End, SEO, HTML, CSS, JS, PHP, Projets tutorés, Doctorat Réseaux" />
-	<meta name="description" content="<?= $auth_pages[$page]['nom'] ?> - Sébastien Linck - <?= $auth_pages[$page]['sous_titre'] ?> - École d’ingénieurs en Sciences Industrielles et Numérique - EiSINe">
-	<meta name="author" content="Sebastien Linck">
-	<link rel="canonical" href="<?= 'https://' . $host . $canonicalPage; ?>">
-	<link rel="manifest" href="./slinck.webmanifest">
-	<link rel="icon" type="image/svg" sizes="256x256" href="./img/favicon.svg">
+	<title><?= h($page['title']) ?></title>
+	<meta name="description" content="<?= h($page['desc']) ?>">
+	<meta name="author" content="Sébastien Linck">
+	<?php if ($slug === 'erreur') : ?>
+		<meta name="robots" content="noindex">
+	<?php endif; ?>
+	<link rel="canonical" href="<?= h($canonical) ?>">
+	<base href="/">
+
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="Sébastien Linck">
+	<meta property="og:title" content="<?= h($page['title']) ?>">
+	<meta property="og:description" content="<?= h($page['desc']) ?>">
+	<meta property="og:url" content="<?= h($canonical) ?>">
+	<meta property="og:image" content="<?= SITE ?>/img/linck.webp">
+	<meta name="twitter:card" content="summary">
 
 	<meta name="theme-color" content="#0A1F44">
-	<meta property="og:title" content="Sébastien Linck – Enseignant en sciences du numérique | EiSINe">
-	<meta property="og:description" content="Site web de Sébastien Linck, enseignant à l’École d’ingénieurs en Sciences Industrielles et Numérique (EiSINe) : formations, enseignements et travaux de recherche.">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://www.slinck.com/">
-	<meta property="og:image" content="https://www.slinck.com/img/linck.webp">
-	<meta property="og:site_name" content="Sébastien Linck">
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-CX6WD4QDPN"></script>
-
-	<script>
-		window.dataLayer = window.dataLayer || [];
-
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-		gtag('config', 'G-CX6WD4QDPN');
-	</script>
-	<link rel="stylesheet" href="./css/style.min.css">
-	<script>
-		// On vérifie le stockage local immédiatement
-		// Si 'dark' est trouvé, on applique l'attribut au HTML avant même l'affichage
-		(function() {
-			const savedTheme = localStorage.getItem('theme');
-			if (savedTheme === 'dark') {
-				document.documentElement.setAttribute('data-theme', 'dark');
+	<link rel="manifest" href="slinck.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+	<link rel="stylesheet" href="css/style.css?v=<?= @filemtime(__DIR__ . '/css/style.css') ?>">
+	<?php /* Mesure d'audience (Matomo) : coller ici le script fourni si vous l'installez */ ?>
+	<?php /* Script volontairement dans <head> et sans "defer" : il applique le thème avant l'affichage (pas de flash) */ ?>
+	<script src="js/app.js?v=<?= @filemtime(__DIR__ . '/js/app.js') ?>"></script>
+	<?php if ($slug === 'accueil') : ?>
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Person",
+				"name": "Sébastien Linck",
+				"jobTitle": "Enseignant en informatique, responsable de la Licence Pro Métiers du Numérique",
+				"worksFor": {
+					"@type": "CollegeOrUniversity",
+					"name": "EiSINe – École d'ingénieurs en Sciences Industrielles et Numérique"
+				},
+				"url": "<?= SITE ?>/",
+				"sameAs": [
+					"https://www.linkedin.com/in/slinck/",
+					"https://www.researchgate.net/profile/Sebastien-Linck"
+				]
 			}
-		})();
-	</script>
+		</script>
+	<?php endif; ?>
 </head>
 
 <body>
 	<div class="app-container">
 
-		<nav class="sidebar">
+		<nav class="sidebar" aria-label="Navigation principale">
 			<div class="logo-area">SL</div>
 
 			<div class="nav-links">
-				<a href="./" class="nav-item <?= $page == 'accueil' ? 'active' : '' ?>">
-					<img class="icons" src="./img/home.svg" alt="Accueil" /><span>Accueil</span>
-				</a>
-				<a href="enseignements" class="nav-item <?= $page == 'enseignements' ? 'active' : '' ?>">
-					<img class="icons" src="./img/lesson.svg" alt="Cours" /><span>Cours</span>
-				</a>
-				<a href="recherche" class="nav-item <?= $page == 'recherche' ? 'active' : '' ?>">
-					<img class="icons" src="./img/network-analytic.svg" alt="Recherche" /><span>Recherche</span>
-				</a>
-				<a href="publications" class="nav-item <?= $page == 'publications' ? 'active' : '' ?>">
-					<img class="icons" src="./img/books.svg" alt="Publi" /><span>Publi</span>
-				</a>
-				<a href="contact" class="nav-item <?= $page == 'contact' ? 'active' : '' ?>">
-					<img class="icons" src="./img/envelope.svg" alt="Contact" /><span>Contact</span>
-				</a>
+				<?php foreach ($pages as $s => $p) : ?>
+					<?php if ($p['menu'] === null) continue; ?>
+					<a href="<?= $s === 'accueil' ? '/' : '/' . $s ?>" class="nav-item<?= $s === $slug ? ' active' : '' ?>" <?= $s === $slug ? 'aria-current="page"' : '' ?>>
+						<img class="icons" src="img/<?= $p['icon'] ?>.svg" alt="" aria-hidden="true"><span><?= h($p['menu']) ?></span>
+					</a>
+				<?php endforeach; ?>
 			</div>
 
-			<button id="theme-toggle" class="theme-toggle" aria-label="Changer le thème">
-				<img src="img/moon.svg" class="icon-moon" alt="Mode Sombre">
-				<img src="img/sun.svg" class="icon-sun" alt="Mode Clair">
+			<button id="theme-toggle" class="theme-toggle" type="button" aria-label="Changer de thème (clair / sombre)">
+				<img src="img/moon.svg" class="icon-moon" alt="" aria-hidden="true">
+				<img src="img/sun.svg" class="icon-sun" alt="" aria-hidden="true">
 			</button>
 		</nav>
 
 		<main class="main-content">
 			<header>
-				<h1><?= $auth_pages[$page]['titre_h1'] ?></h1>
-				<h2><?= $auth_pages[$page]['sous_titre'] ?></h2>
+				<h1><?= h($page['h1']) ?></h1>
+				<h2><?= h($page['h2']) ?></h2>
 			</header>
 
-			<?php
-			if (file_exists($auth_pages[$page]['url'])) {
-				include($auth_pages[$page]['url']);
-			} else {
-				include('./views/erreur.html');
-			}
-			?>
+			<?= $contenu ?>
 
-			<?php include('./views/footer.php'); ?>
-
+			<footer>
+				<span>&copy; Sébastien Linck</span>
+				<div>Mise à jour : <strong><?= h($maj) ?></strong></div>
+				<a href="/mentions-legales" rel="nofollow">Mentions légales</a>
+			</footer>
 		</main>
 	</div>
-
-	<section id="cookie">
-		<h3>Cookies &amp; Confidentialité</h3>
-		<p>Ce site utilise des cookies pour assurer son bon fonctionnement.</p>
-		<button id="cookie-button" type="button">J'ai compris</button>
-	</section>
-	<script src="./js/scripts.min.js?v=<?= @filemtime('./js/scripts.min.js') ?>"></script>
-	<script>
-		if (typeof navigator.serviceWorker !== 'undefined') {
-			navigator.serviceWorker.register('sw.js');
-		}
-	</script>
 </body>
 
 </html>

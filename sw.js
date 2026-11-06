@@ -1,25 +1,34 @@
-// Bump cache name to force renewal when SW changes
-const CACHE = "pwabuilder-offline-v2";
+/* Service worker minimal : réseau d'abord, cache en secours (hors ligne).
+   Changer VERSION force le renouvellement du cache. */
+const VERSION = "slinck-v3";
 
-// On essaie de charger Workbox
-importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js",
-);
+self.addEventListener("install", () => self.skipWaiting());
 
-self.addEventListener("message", (event) => {
-  if (event.data && event.data.type === "SKIP_WAITING") {
-    self.skipWaiting();
-  }
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches
+      .keys()
+      .then((noms) => Promise.all(noms.filter((n) => n !== VERSION).map((n) => caches.delete(n))))
+      .then(() => self.clients.claim()),
+  );
 });
 
-// On vérifie que Workbox est bien chargé avant de l'utiliser
-if (workbox) {
-  workbox.routing.registerRoute(
-    new RegExp("/*"),
-    new workbox.strategies.StaleWhileRevalidate({
-      cacheName: CACHE,
-    }),
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+  const url = new URL(req.url);
+
+  // Uniquement les GET du site ; on laisse passer le formulaire (POST) et les PDF (volumineux)
+  if (req.method !== "GET" || url.origin !== location.origin || url.pathname.startsWith("/articles/")) return;
+
+  event.respondWith(
+    fetch(req)
+      .then((reponse) => {
+        if (reponse.ok) {
+          const copie = reponse.clone();
+          caches.open(VERSION).then((cache) => cache.put(req, copie));
+        }
+        return reponse;
+      })
+      .catch(() => caches.match(req)),
   );
-} else {
-  console.log("Workbox n'a pas pu être chargé.");
-}
+});

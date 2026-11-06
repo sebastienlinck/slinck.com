@@ -1,39 +1,65 @@
-# 1. EN-TÊTES DE SÉCURITÉ & CSP (GTM, GA4, Workbox)
+# =============================================================================
+# slinck.com : configuration Apache
+# =============================================================================
+
+# --- 1. En-têtes de sécurité -------------------------------------------------
+# Pas de script externe (plus de Google Analytics ni de CDN) : politique stricte.
+# Si vous installez Matomo, ajoutez son adresse dans script-src et connect-src.
 <IfModule mod_headers.c>
-    Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://storage.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.stats.g.doubleclick.net; img-src 'self' https://*.google-analytics.com https://*.googletagmanager.com https://*.doubleclick.net https://*.google.com https://*.google.fr;"
-    
-    Header set X-Content-Type-Options "nosniff"
-    Header set X-Frame-Options "sameorigin"
-    Header set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+    Header always set Strict-Transport-Security "max-age=31536000"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
 </IfModule>
 
-# 2. ROUTING & HTTPS
+# --- 2. Redirections et routage ---------------------------------------------
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    RewriteCond %{HTTPS} !=on
-    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+    # slinck.com -> www.slinck.com (en HTTPS directement)
+    RewriteCond %{HTTP_HOST} ^slinck\.com$ [NC]
+    RewriteRule ^(.*)$ https://www.slinck.com/$1 [R=301,L]
+
+    # HTTP -> HTTPS (sauf en local)
+    RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # Dossiers jamais accessibles depuis le web (PHPMailer et pages sont chargés par PHP, pas par le navigateur)
+    RewriteRule ^(pages|vendor|\.git)(/|$) - [F,L]
+
+    # Tout ce qui n'est ni un fichier ni un dossier passe par le routeur
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.+)$ index.php?page=$1 [L,QSA]
 </IfModule>
 
-# 3. PERFORMANCE (Cache)
+# --- 3. Fichiers sensibles ---------------------------------------------------
+# Fichiers commençant par un point (.env, .htaccess, .gitignore...) sauf .well-known (certificats)
+# + fichiers de documentation
+<FilesMatch "^\.(?!well-known)|\.(md|example|log|ini)$">
+    Require all denied
+</FilesMatch>
+
+ServerSignature Off
+Options -Indexes
+
+# --- 4. Performance ----------------------------------------------------------
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json application/manifest+json
+</IfModule>
+
 <IfModule mod_expires.c>
     ExpiresActive On
     ExpiresDefault "access plus 1 day"
     ExpiresByType image/webp "access plus 1 month"
     ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
     ExpiresByType text/css "access plus 1 week"
     ExpiresByType application/javascript "access plus 1 week"
+    # Le service worker ne doit jamais rester longtemps en cache
+    <Files "sw.js">
+        ExpiresDefault "access plus 0 seconds"
+    </Files>
 </IfModule>
-
-# 4. SÉCURITÉ SERVEUR
-ServerSignature Off
-# Bloque l'accès direct aux fichiers sensibles et aux dossiers de structure
-<FilesMatch "(\.htaccess|\.ini|\.env|\.log)$">
-    Require all denied
-</FilesMatch>
-
-# Empêche le listage des fichiers dans vos dossiers de travail
-RedirectMatch 404 ^/(core|views|vendor)/
