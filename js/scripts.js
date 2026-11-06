@@ -181,8 +181,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (statusMessageElement) statusMessageElement.innerHTML = "";
 
         try {
-          // On cible bien sendmail.php
-          const response = await fetch("./pages/sendmail.php", {
+          // On cible bien Mailer.php
+          const response = await fetch("./core/Mailer.php", {
             method: "POST",
             body: formData,
           });
