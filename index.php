@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Routeur + gabarit du site.
  * 1. Chaque page est un fichier de pages/ (logique PHP en haut, contenu HTML en dessous).
@@ -140,7 +139,8 @@ function h(string $s): string
 	<meta property="og:image" content="<?= SITE ?>/img/linck.webp">
 	<meta name="twitter:card" content="summary">
 
-	<meta name="theme-color" content="#0A1F44">
+	<meta name="theme-color" content="#100e17">
+	<meta name="color-scheme" content="dark light">
 	<link rel="manifest" href="slinck.webmanifest">
 	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 	<link rel="stylesheet" href="css/style.css?v=<?= @filemtime(__DIR__ . '/css/style.css') ?>">

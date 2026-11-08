@@ -1,9 +1,53 @@
 <div class="bento-grid">
-  <article class="card">
-    <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" loading="lazy" />
+  <article class="card hero">
+    <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" width="400" height="400" fetchpriority="high" />
+    <div>
+      <p class="lead">
+        Ingénieur et docteur en informatique, j'enseigne le développement web
+        et les réseaux, et je dirige une licence professionnelle du numérique.
+      </p>
+      <div class="chips">
+        <span class="chip">Développement web</span>
+        <span class="chip">Réseaux</span>
+        <span class="chip">Pédagogie</span>
+      </div>
+    </div>
   </article>
 
-  <article class="card span-2 card-c3">
+  <article class="card tile-accent tile-k1">
+    <p class="eyebrow">Depuis 2014</p>
+    <h3>Responsable de la licence professionnelle Métiers du numérique</h3>
+    <p>EiSINe, Charleville-Mézières</p>
+  </article>
+
+  <article class="card stat tile-k2">
+    <b>2008</b>
+    <span>Doctorat en informatique</span>
+  </article>
+
+  <article class="card tile-cta tile-k3">
+    <h3>Une question sur la formation&nbsp;?</h3>
+    <a class="btn" href="/contact">Me contacter</a>
+  </article>
+
+  <a class="card tile-link" href="/enseignements">
+    <span class="ic tile-k1"><img src="img/lesson.svg" alt="" /></span>
+    <b>Cours</b><small>Modules enseignés</small>
+  </a>
+  <a class="card tile-link" href="/recherche">
+    <span class="ic tile-k2"><img src="img/network-analytic.svg" alt="" /></span>
+    <b>Recherche</b><small>Réseaux et EIAH</small>
+  </a>
+  <a class="card tile-link" href="/publications">
+    <span class="ic tile-k3"><img src="img/books.svg" alt="" /></span>
+    <b>Publications</b><small>Articles et thèse</small>
+  </a>
+  <a class="card tile-link" href="/contact">
+    <span class="ic tile-k1"><img src="img/envelope.svg" alt="" /></span>
+    <b>Contact</b><small>Admissions et questions</small>
+  </a>
+
+  <article class="card span-3 card-c3">
     <h3>Qui suis-je ?</h3>
     <p>
       Après un parcours académique en ingénierie informatique, ponctué d'un DEA
