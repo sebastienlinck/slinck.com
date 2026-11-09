@@ -1,3 +1,19 @@
+Claude
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Style · CSS
 /* =============================================================
    1. PALETTE « LILAS » : seule section à modifier pour changer de couleurs
    3 couleurs : k1 violet, k2 menthe, k3 pêche (+ encre sombre pour le texte dessus)
@@ -160,7 +176,7 @@ a {
   width: 6.2rem;
   padding: clamp(0.45rem, 1.4vh, 1rem) 0 clamp(0.4rem, 1.2vh, 0.8rem);
   border-radius: 1.2rem;
-  font-size: 0.82rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--muted);
 }
@@ -247,7 +263,7 @@ footer {
   justify-content: center;
   gap: 0.5rem 1.5rem;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 footer a {
   color: var(--link);
@@ -381,10 +397,16 @@ ul > :last-child {
   height: auto;
   max-height: none;
 }
+.hero-title {
+  font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.7rem;
+}
 .lead {
-  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
-  line-height: 1.45;
-  font-weight: 500;
+  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  line-height: 1.5;
   margin-bottom: 0.9rem;
 }
 .chips {
@@ -396,7 +418,7 @@ ul > :last-child {
   background: var(--card2);
   padding: 0.2rem 0.8rem;
   border-radius: 999px;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 .tile-accent {
@@ -407,8 +429,11 @@ ul > :last-child {
   font-size: 1.5rem;
   line-height: 1.25;
 }
+.tile-accent .btn {
+  margin-top: 1rem;
+}
 .eyebrow {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 .stat {
@@ -421,14 +446,6 @@ ul > :last-child {
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 0.4rem;
-}
-.tile-cta {
-  grid-column: span 3;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-.tile-cta h3 {
-  margin-bottom: 0;
 }
 .btn {
   align-self: flex-start;
@@ -454,7 +471,7 @@ ul > :last-child {
 }
 .tile-link small {
   color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 1rem;
 }
 .ic {
   width: 2.4rem;
@@ -525,7 +542,7 @@ form {
 }
 label {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 input[type="text"],
 input[type="email"],
@@ -657,7 +674,6 @@ input[type="submit"]:hover {
     grid-row: auto;
   }
   .stat,
-  .tile-cta,
   .tile-link {
     grid-column: span 1;
   }

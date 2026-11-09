@@ -18,16 +18,20 @@
     <p class="eyebrow">Depuis 2014</p>
     <h3>Responsable de la licence professionnelle Métiers du numérique</h3>
     <p>EiSINe, Charleville-Mézières</p>
+    <a class="btn" href="/contact">Me contacter</a>
   </article>
 
   <article class="card stat tile-k2">
-    <b>2008</b>
-    <span>Doctorat en informatique</span>
+    <?php
+    $annees = round(date_diff(date_create('2007-09-01'), date_create())->days / 365.25);
+    ?>
+    <b><?= $annees ?></b>
+    <span>d'enseignement, depuis septembre 2007</span>
   </article>
 
-  <article class="card tile-cta tile-k3">
-    <h3>Une question sur la formation&nbsp;?</h3>
-    <a class="btn" href="/contact">Me contacter</a>
+  <article class="card stat tile-k3">
+    <b>10</b>
+    <span>formations dans 5 établissements</span>
   </article>
 
   <a class="card tile-link" href="/enseignements">
