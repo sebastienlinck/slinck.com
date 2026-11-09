@@ -1,19 +1,3 @@
-Claude
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Style · CSS
 /* =============================================================
    1. PALETTE « LILAS » : seule section à modifier pour changer de couleurs
    3 couleurs : k1 violet, k2 menthe, k3 pêche (+ encre sombre pour le texte dessus)
@@ -384,11 +368,12 @@ ul > :last-child {
 .hero {
   grid-column: span 6;
   grid-row: span 2;
-  flex-direction: row;
-  align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
+  gap: 1.75rem;
 }
-.hero {
+.hero-main {
+  display: flex;
+  align-items: center;
   gap: 2rem;
 }
 .hero .img-avatar {
@@ -423,14 +408,21 @@ ul > :last-child {
 }
 .tile-accent {
   grid-column: span 6;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 .tile-accent h3 {
   font-size: 1.5rem;
   line-height: 1.25;
 }
-.tile-accent .btn {
-  margin-top: 1rem;
+.tile-k1 .chip {
+  background: rgba(18, 14, 34, 0.14);
+}
+.tile-foot {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
 }
 .eyebrow {
   font-size: 1rem;
@@ -438,14 +430,14 @@ ul > :last-child {
 }
 .stat {
   grid-column: span 3;
-  justify-content: center;
+  justify-content: space-between; /* chiffre en haut, légende en bas : alignés d'une tuile à l'autre */
+  gap: 0.75rem;
 }
 .stat b {
   font-size: clamp(2.2rem, 4vw, 3rem);
   line-height: 1;
   font-weight: 800;
   letter-spacing: -0.03em;
-  margin-bottom: 0.4rem;
 }
 .btn {
   align-self: flex-start;
@@ -677,9 +669,12 @@ input[type="submit"]:hover {
   .tile-link {
     grid-column: span 1;
   }
-  .hero {
+  .hero-main {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .timeline {
+    grid-template-columns: 1fr;
   }
   .hero .img-avatar {
     width: min(100%, 15rem);

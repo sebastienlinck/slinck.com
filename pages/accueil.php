@@ -1,32 +1,48 @@
+<?php
+// Années d'enseignement depuis septembre 2007 : se met à jour tout seul
+$annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
+?>
 <div class="bento-grid">
   <article class="card hero">
-    <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" width="400" height="400" fetchpriority="high" />
-    <div>
-      <p class="lead">
-        Ingénieur et docteur en informatique, j'enseigne le développement web
-        et les réseaux, et je dirige une licence professionnelle du numérique.
-      </p>
-      <div class="chips">
-        <span class="chip">Développement web</span>
-        <span class="chip">Réseaux</span>
-        <span class="chip">Pédagogie</span>
+    <div class="hero-main">
+      <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" width="400" height="400" fetchpriority="high" />
+      <div>
+        <p class="hero-title">Former aux métiers du web.</p>
+        <p class="lead">
+          Enseignant en informatique depuis 2007, responsable de la licence
+          professionnelle Métiers du numérique.
+        </p>
+        <div class="chips">
+          <span class="chip">Développement web</span>
+          <span class="chip">Réseaux</span>
+          <span class="chip">Pédagogie</span>
+        </div>
       </div>
     </div>
+    <!-- <ol class="timeline">
+      <li><b>2007</b><span>Début de l'enseignement</span></li>
+      <li><b>2008</b><span>Poste à l'EiSINe, Charleville-Mézières</span></li>
+      <li><b>2014</b><span>Responsable de la licence pro Métiers du numérique</span></li>
+    </ol>-->
   </article>
 
   <article class="card tile-accent tile-k1">
-    <p class="eyebrow">Depuis 2014</p>
+    <p class="eyebrow">Depuis 2014 · EiSINe, Charleville-Mézières</p>
     <h3>Responsable de la licence professionnelle Métiers du numérique</h3>
-    <p>EiSINe, Charleville-Mézières</p>
-    <a class="btn" href="/contact">Me contacter</a>
+    <div class="chips">
+      <span class="chip">Formation initiale</span>
+      <span class="chip">Alternance</span>
+      <span class="chip">Formation continue</span>
+    </div>
+    <div class="tile-foot">
+      <a class="btn" href="/contact">Me contacter</a>
+      <span>Candidatures de février à juin</span>
+    </div>
   </article>
 
   <article class="card stat tile-k2">
-    <?php
-    $annees = round(date_diff(date_create('2007-09-01'), date_create())->days / 365.25);
-    ?>
-    <b><?= $annees ?> années</b>
-    <span>d'enseignement, depuis septembre 2007</span>
+    <b><?= $annees ?></b>
+    <span>ans d'enseignement depuis 2007</span>
   </article>
 
   <article class="card stat tile-k3">
