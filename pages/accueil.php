@@ -25,7 +25,7 @@
     <?php
     $annees = round(date_diff(date_create('2007-09-01'), date_create())->days / 365.25);
     ?>
-    <b><?= $annees ?></b>
+    <b><?= $annees ?> années</b>
     <span>d'enseignement, depuis septembre 2007</span>
   </article>
 
