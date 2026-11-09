@@ -11,9 +11,11 @@
           Contact : <strong>contact(@)slinck.com</strong>
         </p>
         <p>
-          Ce site est un site personnel. Les opinions et contenus publiés
-          n'engagent que son auteur et ne constituent pas une communication
-          officielle de l'EiSINe ni de l'université.
+          Ce site est personnel : il est conçu, financé et géré par son auteur,
+          sans lien direct avec l'université. Mon activité d'enseignant y est
+          présentée à titre d'information ; les contenus publiés n'engagent
+          que moi et ne constituent pas une communication officielle de
+          l'EiSINe ni de l'université.
         </p>
       </div>
       <div>

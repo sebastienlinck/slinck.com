@@ -49,6 +49,17 @@ html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
 }
+/* Grands écrans : on agrandit tout le site (tailles en rem) */
+@media (min-width: 1800px) {
+  html {
+    font-size: 112.5%;
+  }
+}
+@media (min-width: 2400px) {
+  html {
+    font-size: 125%;
+  }
+}
 body {
   font-family: var(--font);
   background: var(--bg);
@@ -93,7 +104,7 @@ a {
   min-height: 100vh;
   padding: 1rem;
   gap: 1rem;
-  max-width: 100rem;
+  max-width: 110rem;
   margin: 0 auto;
 }
 .main-content {
@@ -105,14 +116,15 @@ a {
 }
 
 .sidebar {
-  width: 5.5rem;
+  width: 7.5rem;
   background: var(--card);
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 0;
+  padding: clamp(0.75rem, 2vh, 1.5rem) 0;
+  gap: 0.75rem; /* espace minimal garanti entre logo, liens et bouton de thème */
   position: sticky;
   top: 1rem;
   height: calc(100vh - 2rem);
@@ -120,37 +132,41 @@ a {
 }
 .logo-area {
   font-weight: 800;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: var(--ink);
   background: var(--k1);
-  width: 3.2rem;
-  height: 3.2rem;
+  flex: none;
+  width: clamp(3rem, 6.5vh, 4rem);
+  height: clamp(3rem, 6.5vh, 4rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 1rem;
+  border-radius: 1.2rem;
 }
 .nav-links {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: clamp(0.25rem, 1.6vh, 1.5rem);
   align-items: center;
+  min-height: 0; /* sur une fenêtre très basse, les liens défilent au lieu de déborder */
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
-  width: 4.3rem;
-  padding: 0.6rem 0;
-  border-radius: 1rem;
-  font-size: 0.72rem;
+  gap: 0.3rem;
+  width: 6.2rem;
+  padding: clamp(0.45rem, 1.4vh, 1rem) 0 clamp(0.4rem, 1.2vh, 0.8rem);
+  border-radius: 1.2rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--muted);
 }
 .nav-item img {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: clamp(1.6rem, 3.4vh, 2.1rem);
+  height: clamp(1.6rem, 3.4vh, 2.1rem);
   filter: var(--ico);
 }
 .nav-item:hover {
@@ -169,8 +185,9 @@ a {
   background: var(--card2);
   border: none;
   cursor: pointer;
-  width: 2.8rem;
-  height: 2.8rem;
+  flex: none;
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
@@ -256,17 +273,37 @@ footer a {
   flex-direction: column;
   min-width: 0;
 }
-.span-1 { grid-column: span 4; }
-.span-2 { grid-column: span 8; }
-.span-3 { grid-column: span 12; }
-.half { grid-column: span 6; }
-.quarter { grid-column: span 3; }
-.row-2 { grid-row: span 2; }
+.span-1 {
+  grid-column: span 4;
+}
+.span-2 {
+  grid-column: span 8;
+}
+.span-3 {
+  grid-column: span 12;
+}
+.half {
+  grid-column: span 6;
+}
+.quarter {
+  grid-column: span 3;
+}
+.row-2 {
+  grid-row: span 2;
+}
 
 /* Variantes de cartes : neutre, neutre relevé, teinté violet. Un point de couleur marque chaque titre. */
-.card-c1 { --dot: var(--k1); }
-.card-c2 { --dot: var(--k2); background: var(--card2); }
-.card-c3 { --dot: var(--k3); background: var(--tint); }
+.card-c1 {
+  --dot: var(--k1);
+}
+.card-c2 {
+  --dot: var(--k2);
+  background: var(--card2);
+}
+.card-c3 {
+  --dot: var(--k3);
+  background: var(--tint);
+}
 .card h3 {
   font-size: 1.15rem;
   font-weight: 700;
@@ -307,11 +344,25 @@ ul > :last-child {
 }
 
 /* Aplats de couleur (texte sombre) */
-.tile-k1 { background: var(--k1); }
-.tile-k2 { background: var(--k2); }
-.tile-k3 { background: var(--k3); }
-.tile-k1, .tile-k2, .tile-k3 { color: var(--ink); }
-.tile-k1 h3, .tile-k2 h3, .tile-k3 h3 { color: var(--ink); }
+.tile-k1 {
+  background: var(--k1);
+}
+.tile-k2 {
+  background: var(--k2);
+}
+.tile-k3 {
+  background: var(--k3);
+}
+.tile-k1,
+.tile-k2,
+.tile-k3 {
+  color: var(--ink);
+}
+.tile-k1 h3,
+.tile-k2 h3,
+.tile-k3 h3 {
+  color: var(--ink);
+}
 
 /* --- Tuiles de la page d'accueil --- */
 .hero {
@@ -321,14 +372,17 @@ ul > :last-child {
   align-items: center;
   gap: 1.5rem;
 }
+.hero {
+  gap: 2rem;
+}
 .hero .img-avatar {
   flex: none;
-  width: 9rem;
-  height: 9rem;
+  width: clamp(11rem, 20vw, 19rem);
+  height: auto;
   max-height: none;
 }
 .lead {
-  font-size: 1.2rem;
+  font-size: clamp(1.2rem, 1.6vw, 1.5rem);
   line-height: 1.45;
   font-weight: 500;
   margin-bottom: 0.9rem;
@@ -535,8 +589,12 @@ input[type="submit"]:hover {
   font-weight: 700;
   color: var(--ink);
 }
-.alerte-ok { background: var(--k2); }
-.alerte-erreur { background: var(--danger); }
+.alerte-ok {
+  background: var(--k2);
+}
+.alerte-erreur {
+  background: var(--danger);
+}
 
 /* =============================================================
    6. MOBILE : menu en barre du bas, tout en colonne
@@ -574,6 +632,14 @@ input[type="submit"]:hover {
     padding: 0;
     justify-content: center;
   }
+  .nav-item img {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+  .theme-toggle {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
   /* libellés masqués visuellement mais lus par les lecteurs d'écran */
   .nav-item span {
     position: absolute;
@@ -598,6 +664,9 @@ input[type="submit"]:hover {
   .hero {
     flex-direction: column;
     align-items: flex-start;
+  }
+  .hero .img-avatar {
+    width: min(100%, 15rem);
   }
   .cols-2 {
     grid-template-columns: 1fr;
