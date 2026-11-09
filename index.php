@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Routeur + gabarit du site.
  * 1. Chaque page est un fichier de pages/ (logique PHP en haut, contenu HTML en dessous).
@@ -43,7 +44,7 @@ $pages = [
 		'h1'    => 'Publications',
 		'h2'    => 'Articles, Conférences & Thèse',
 		'desc'  => 'Articles de revues, conférences internationales et thèse de doctorat de Sébastien Linck, avec liens PDF.',
-		'menu'  => 'Publi',
+		'menu'  => 'Publis',
 		'icon'  => 'books',
 	],
 	'contact' => [
