@@ -1,4 +1,4 @@
-# Site personnel — Sébastien Linck
+# Site personnel - Sébastien Linck
 
 Site PHP séquentiel, sans framework ni base de données.
 
