@@ -12,6 +12,9 @@
   --muted: #9b94b3;
   --line: rgba(255, 255, 255, 0.08);
   --link: #a78bfa; /* violet lisible sur fond sombre */
+  --k1-text: #a78bfa; /* couleurs du texte en gras (<strong>), une par variante de carte */
+  --k2-text: #5eead4;
+  --k3-text: #fdba74;
   --ico: brightness(0) invert(1); /* icônes SVG en blanc */
 }
 [data-theme="light"] {
@@ -23,6 +26,9 @@
   --muted: #615c80;
   --line: rgba(23, 20, 42, 0.1);
   --link: #6240d6; /* violet foncé lisible sur fond clair */
+  --k1-text: #6240d6; /* versions foncées : les teintes d'origine sont trop pâles sur fond clair */
+  --k2-text: #0d6b64;
+  --k3-text: #a24a06;
   --ico: brightness(0); /* icônes SVG en noir */
 }
 :root {
@@ -294,13 +300,16 @@ footer a {
 /* Variantes de cartes : neutre, neutre relevé, teinté violet. Un point de couleur marque chaque titre. */
 .card-c1 {
   --dot: var(--k1);
+  --dot-text: var(--k1-text);
 }
 .card-c2 {
   --dot: var(--k2);
+  --dot-text: var(--k2-text);
   background: var(--card2);
 }
 .card-c3 {
   --dot: var(--k3);
+  --dot-text: var(--k3-text);
   background: var(--tint);
 }
 .card h3 {
@@ -341,6 +350,11 @@ ul > :last-child {
   text-underline-offset: 3px;
 }
 
+/* Texte en gras (<strong>) : même couleur que le point de la carte (violet par défaut) */
+.card strong {
+  color: var(--dot-text, var(--link));
+}
+
 /* Aplats de couleur (texte sombre) */
 .tile-k1 {
   background: var(--k1);
@@ -361,6 +375,11 @@ ul > :last-child {
 .tile-k3 h3 {
   color: var(--ink);
 }
+.tile-k1 strong,
+.tile-k2 strong,
+.tile-k3 strong {
+  color: inherit; /* sur un aplat de couleur : encre sombre */
+}
 
 /* --- Tuiles de la page d'accueil --- */
 .hero {
@@ -368,11 +387,6 @@ ul > :last-child {
   grid-row: span 2;
   justify-content: center;
   gap: 1.75rem;
-}
-.hero-main {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
 }
 .hero .img-avatar {
   flex: none;
@@ -668,9 +682,6 @@ input[type="submit"]:hover {
   .hero-main {
     flex-direction: column;
     align-items: flex-start;
-  }
-  .timeline {
-    grid-template-columns: 1fr;
   }
   .hero .img-avatar {
     width: min(100%, 15rem);

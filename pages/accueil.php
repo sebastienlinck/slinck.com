@@ -4,7 +4,7 @@ $annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
 ?>
 <div class="bento-grid">
   <article class="card hero">
-    <div class="hero-main">
+    <div>
       <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" width="400" height="400" fetchpriority="high" />
       <div>
         <p class="hero-title">Former aux métiers du web.</p>
