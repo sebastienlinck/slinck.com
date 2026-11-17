@@ -19,11 +19,6 @@ $annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
         </div>
       </div>
     </div>
-    <!-- <ol class="timeline">
-      <li><b>2007</b><span>Début de l'enseignement</span></li>
-      <li><b>2008</b><span>Poste à l'EiSINe, Charleville-Mézières</span></li>
-      <li><b>2014</b><span>Responsable de la licence pro Métiers du numérique</span></li>
-    </ol>-->
   </article>
 
   <article class="card tile-accent tile-k1">
@@ -67,7 +62,7 @@ $annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
     <b>Contact</b><small>Admissions et questions</small>
   </a>
 
-  <article class="card span-3 card-c3">
+  <article class="card spanme con-3 card-c3">
     <h3>Qui suis-je ?</h3>
     <p>
       Après un parcours académique en ingénierie informatique, ponctué d'un DEA

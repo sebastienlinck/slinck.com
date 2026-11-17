@@ -30,9 +30,9 @@
       <h3>Retrouver mon chemin</h3>
       <p>Ne restez pas dans cette impasse numérique. Voici les accès rapides :</p>
       <ul style="list-style: none; padding: 0;">
-        <li><a href="enseignements">→ Consulter les cours</a></li>
-        <li><a href="recherche">→ Travaux de recherche</a></li>
-        <li><a href="publications">→ Liste des publications</a></li>
+        <li><a href="enseignements">&rarr; Consulter mes cours</a></li>
+        <li><a href="recherche">&rarr; Mes travaux de recherche</a></li>
+        <li><a href="publications">&rarr; Liste de mes publications</a></li>
       </ul>
     </article>
   </div>

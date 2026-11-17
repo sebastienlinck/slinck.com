@@ -339,7 +339,7 @@ footer a {
   margin-bottom: 0.5rem;
 }
 .card > :last-child,
-ul > :last-child {
+.card > ul:last-child > :last-child {
   margin-bottom: 0;
 }
 .card p a,
