@@ -99,63 +99,70 @@ $modules = [
 	[
 		'tags' => 'eisine ing-mm',
 		'compo' => 'eisine',
-		'formation' => 'Ingénieur Matériaux et Mécanique (MM2 = 2e année)',
+		'formation' => 'Ingénieur Matériaux et Mécanique (MM2)',
 		'titre' => 'Collecte et filtrage des données',
 	],
 	[
 		'tags' => 'eisine ing-mm',
 		'compo' => 'eisine',
-		'formation' => 'Ingénieur Matériaux et Mécanique (MM3 = 3e année)',
+		'formation' => 'Ingénieur Matériaux et Mécanique (MM3)',
 		'titre' => 'Compétences rédactionnelles',
+	],
+	// ==================== EiSINe : Ingénieur Génie Mécanique ====================
+	[
+		'tags' => 'eisine ing-gm',
+		'compo' => 'eisine',
+		'formation' => 'Ingénieur Génie Mécanique (GM1)',
+		'titre' => 'Instrumentaton et données',
 	],
 
 	// ==================== EiSINe : Licence Sciences pour l'Ingénieur ====================
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L1 = Licence 1re année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L1)",
 		'titre' => 'Algorithmique de base',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L1 = Licence 1re année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L1)",
 		'titre' => 'Langage C',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L1 = Licence 1re année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L1)",
 		'titre' => 'Bureautique : Word, Excel, PowerPoint',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L2 = Licence 2e année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L2)",
 		'titre' => 'Langage Java',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L2 = Licence 2e année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L2)",
 		'titre' => 'Visual Basic for Application – Excel',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L2 = Licence 2e année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L2)",
 		'titre' => 'Architecture machines et réseaux',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L3 = Licence 3e année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L3)",
 		'titre' => 'Implémentation informatique des méthodes numériques',
 	],
 	[
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
-		'formation' => "Licence Sciences pour l'Ingénieur (L3 = Licence 3e année)",
+		'formation' => "Licence Sciences pour l'Ingénieur (L3)",
 		'titre' => 'Modélisation Orientée Objet, Langage C++',
 	],
 
@@ -164,7 +171,7 @@ $modules = [
 		'tags' => 'eisine master-ic',
 		'compo' => 'eisine',
 		'formation' => 'Master IC (M1 / M2)',
-		'titre' => 'Enseignements Master IC',
+		'titre' => 'Capteurs et Informatique',
 	],
 
 	// ==================== CCI des Ardennes ====================
@@ -185,7 +192,7 @@ $modules = [
 	[
 		'tags' => 'iut-nfc',
 		'compo' => 'iut-nfc',
-		'formation' => "DUT Métiers du Multimédia et de l'Internet (MMI · Bac+2 · site Montbéliard)",
+		'formation' => "DUT Métiers du Multimédia et de l'Internet (MMI)",
 		'titre' => 'Architecture des ordinateurs',
 	],
 
@@ -193,13 +200,13 @@ $modules = [
 	[
 		'tags' => 'stgi',
 		'compo' => 'stgi',
-		'formation' => 'Master Services et Réseaux en Mobilité (M2 = Master 2e année · Montbéliard)',
+		'formation' => 'Master Services et Réseaux en Mobilité (M2)',
 		'titre' => 'Simulation Réseau (NS-2) [Cours en anglais]',
 	],
 	[
 		'tags' => 'stgi',
 		'compo' => 'stgi',
-		'formation' => 'Master Langues et Commerce Électronique (M1 = Master 1re année · Montbéliard)',
+		'formation' => 'Master Langues et Commerce Électronique (M1)',
 		'titre' => 'Création de site web (HTML, CSS)',
 	],
 
@@ -207,13 +214,13 @@ $modules = [
 	[
 		'tags' => 'utbm',
 		'compo' => 'utbm',
-		'formation' => 'Tronc commun (1re / 2e année cycle préparatoire ingénieur)',
+		'formation' => 'Tronc commun (Cycle préparatoire ingénieur)',
 		'titre' => 'Programmation Langage C',
 	],
 	[
 		'tags' => 'utbm',
 		'compo' => 'utbm',
-		'formation' => 'Tronc commun (1re / 2e année cycle préparatoire ingénieur)',
+		'formation' => 'Tronc commun (Cycle préparatoire ingénieur)',
 		'titre' => 'Projets informatiques',
 	],
 ];
@@ -233,6 +240,7 @@ $modules = [
 		<span class="filter-label">Formations EiSINe</span>
 		<button type="button" class="chip" data-filter="lp-mn" aria-pressed="false">LP Métiers du Numérique</button>
 		<button type="button" class="chip" data-filter="ing-mm" aria-pressed="false">Ingénieur MM</button>
+		<button type="button" class="chip" data-filter="ing-gm" aria-pressed="false">Ingénieur GM</button>
 		<button type="button" class="chip" data-filter="licence-spi" aria-pressed="false">Licence SPI</button>
 		<button type="button" class="chip" data-filter="master-ic" aria-pressed="false">Master IC</button>
 	</div>
@@ -242,15 +250,15 @@ $modules = [
 <div class="bento-grid modules">
 	<?php foreach ($modules as $m) : ?>
 		<?php [$classe, $badge] = $composantes[$m['compo']]; ?>
-		<article class="card <?= isset($m['largeur']) ? h($m['largeur']) . ' ' : '' ?><?= $classe ?>" data-tags="<?= h($m['tags']) ?>">
-			<div class="module-head">
+		<article class="card <?= $classe ?>" data-tags="<?= h($m['tags']) ?>">
+			<div class="module-top">
 				<span class="badge"><?= h($badge) ?></span>
-				<span class="formation"><?= h($m['formation']) ?></span>
+				<?php if (!empty($m['niveau'])) : ?>
+					<span class="niveau-tag"><?= h($m['niveau']) ?></span>
+				<?php endif; ?>
 			</div>
 			<h3><?= h($m['titre']) ?></h3>
-			<?php if (!empty($m['contenu'])) : ?>
-				<p><?= h($m['contenu']) ?></p>
-			<?php endif; ?>
+			<p class="formation"><?= h($m['formation']) ?></p>
 		</article>
 	<?php endforeach; ?>
 </div>

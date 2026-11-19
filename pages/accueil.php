@@ -39,7 +39,7 @@ $annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
   </article>
 
   <article class="card stat tile-k3">
-    <b>10</b>
+    <b>11</b>
     <span>formations dans 5 établissements</span>
   </article>
 
