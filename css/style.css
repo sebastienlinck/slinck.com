@@ -15,6 +15,8 @@
   --k1-text: #a78bfa; /* couleurs du texte en gras (<strong>), une par variante de carte */
   --k2-text: #5eead4;
   --k3-text: #fdba74;
+  --k4-text: #38bdf8;
+  --k5-text: #fb7185;
   --ico: brightness(0) invert(1); /* icônes SVG en blanc */
 }
 [data-theme="light"] {
@@ -29,12 +31,16 @@
   --k1-text: #6240d6; /* versions foncées : les teintes d'origine sont trop pâles sur fond clair */
   --k2-text: #0d6b64;
   --k3-text: #a24a06;
+  --k4-text: #0369a1;
+  --k5-text: #be123c;
   --ico: brightness(0); /* icônes SVG en noir */
 }
 :root {
   --k1: #a78bfa;
   --k2: #5eead4;
   --k3: #fdba74;
+  --k4: #38bdf8; /* bleu ciel : Université Marie & Louis Pasteur */
+  --k5: #fb7185; /* corail : UTBM */
   --ink: #120e22; /* texte sur les aplats de couleur */
   --danger: #ff8a8a;
   --tint: color-mix(in srgb, var(--k1) 13%, var(--card));
@@ -302,6 +308,16 @@ footer a {
   --dot: var(--k3);
   --dot-text: var(--k3-text);
   background: var(--tint);
+}
+.card-c4 {
+  --dot: var(--k4);
+  --dot-text: var(--k4-text);
+  background: color-mix(in srgb, var(--k4) 10%, var(--card));
+}
+.card-c5 {
+  --dot: var(--k5);
+  --dot-text: var(--k5-text);
+  background: color-mix(in srgb, var(--k5) 10%, var(--card));
 }
 .card h3 {
   font-size: 1.125rem;
@@ -609,7 +625,95 @@ input[type="submit"]:hover {
 }
 
 /* =============================================================
-   6. MOBILE : menu en barre du bas, tout en colonne
+   6. PAGE ENSEIGNEMENTS : barre de filtres et blocs « module »
+   ============================================================= */
+/* Un bloc masqué par le filtre doit vraiment disparaître : sans cette règle, « display: flex » de .card l'emporte sur l'attribut hidden */
+.card[hidden],
+.filter-bar[hidden] {
+  display: none;
+}
+
+/* Dans cette page, chaque composante colore ses blocs d'un fond léger (violet = EiSINe, orange = CCI) */
+.modules .card-c1 {
+  background: color-mix(in srgb, var(--k1) 10%, var(--card));
+}
+.modules .card-c3 {
+  background: color-mix(in srgb, var(--k3) 10%, var(--card));
+}
+.modules .card-c2 {
+  background: color-mix(in srgb, var(--k2) 10%, var(--card));
+}
+
+/* Barre de filtres : deux rangées de boutons (réutilise .chip) */
+.filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.filter-label {
+  color: var(--muted);
+  font-weight: 600;
+  margin-right: 0.25rem;
+}
+.filter-bar .chip {
+  border: 0;
+  font: inherit;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  padding: 0.5rem 1rem; /* zone tactile confortable (≈ 42 px de haut) */
+}
+.filter-bar .chip:hover {
+  background: color-mix(in srgb, var(--k1) 25%, var(--card2));
+}
+.filter-bar .chip[aria-pressed="true"] {
+  background: var(--k1);
+  color: var(--ink);
+}
+.filter-count {
+  color: var(--muted);
+}
+
+/* En-tête institutionnel de chaque bloc : badge de composante + formation et niveau */
+.module-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-weight: 700;
+  background: var(--dot); /* couleur de la composante */
+  color: var(--ink);
+}
+.formation {
+  font-weight: 500;
+}
+
+/* Les blocs qui (ré)apparaissent s'affichent en douceur */
+@media (prefers-reduced-motion: no-preference) {
+  .modules .card {
+    animation: apparait 0.25s ease;
+  }
+}
+@keyframes apparait {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+
+/* =============================================================
+   7. MOBILE : menu en barre du bas, tout en colonne
    ============================================================= */
 @media (max-width: 900px) {
   .app-container {
@@ -681,6 +785,16 @@ input[type="submit"]:hover {
   }
   .cols-2 {
     grid-template-columns: 1fr;
+  }
+  /* Filtres : chaque rangée défile au doigt, sans élargir la page */
+  .filter-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-row > * {
+    flex: none;
   }
   .split-content {
     flex-direction: column;

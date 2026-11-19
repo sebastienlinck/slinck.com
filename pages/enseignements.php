@@ -1,120 +1,256 @@
-<div class="bento-grid">
-  <article class="card span-2 row-2 card-c1">
-    <h3>École d'ingénieurs en Sciences Industrielles et Numérique (EiSINe)</h3>
-    <h4>
-      Licence Professionnelle Métiers du numérique : Conception, Rédaction et
-      Réalisation Web (Responsable)
-    </h4>
+<?php
 
-    <div class="split-content">
-      <div>
-        <p><strong>Développement &amp; Intégration</strong></p>
-        <ul>
-          <li>Intégration web HTML et CSS</li>
-          <li>Animation (CSS, SMIL, WAAPI, GSAP)</li>
-          <li>Développement Frontend (JavaScript, Vue.js, JQuery)</li>
-          <li>Développement Backend (PHP)</li>
-          <li>Base de données (Modèle Conceptuel de Données et SQL)</li>
-          <li>
-            Framework CSS (Bootstrap, Materialize, Skeleton...) et
-            Préprocesseurs CSS (SASS)
-          </li>
-        </ul>
-      </div>
-      <div>
-        <p><strong>Écosystème &amp; Outils</strong></p>
-        <ul>
-          <li>Référencement, SEO</li>
-          <li>
-            Système de Gestion De Contenus (Wordpress, Joomla, Prestashop...)
-          </li>
-          <li>
-            Développement d'extensions pour navigateur, Progressive Web App (PWA)
-          </li>
-          <li>Architecture web, initiation réseaux et sécurité</li>
-          <li>Communication digitale, réseaux sociaux</li>
-          <li>Travail collaboratif, versionning (Git)</li>
-        </ul>
-      </div>
-    </div>
-  </article>
+/**
+ * Page Enseignements : 1 bloc Bento = 1 cours / matière, filtrable par composante ou par formation.
+ */
 
-  <article class="card card-c2">
-    <h3>Ingénieur Matériaux et Mécanique</h3>
-    <ul>
-      <li>Informatique (MM1)</li>
-      <li>Collecte et filtrage des données (MM2)</li>
-      <li>Compétences rédactionnelles (MM3)</li>
-    </ul>
-  </article>
+// Composantes : clé => [classe de couleur de la carte, libellé du badge]
+$composantes = [
+	'eisine'  => ['card-c1', 'EiSINe (URCA)'],
+	'cci'     => ['card-c3', 'CCI des Ardennes'],
+	'iut-nfc' => ['card-c4', 'IUT Nord Franche-Comté (UMLP)'],
+	'stgi'    => ['card-c2', 'UFR STGI (UMLP)'],
+	'utbm'    => ['card-c5', 'UTBM (Sevenans)'],
+];
 
-  <article class="card card-c3">
-    <h3>Formation Chambre de Commerce et de l'Industrie des Ardennes</h3>
-    <ul>
-      <li>
-        Formation en réseaux et sécurité pour le personnel de l'Agence Nationale
-        des Titres Sécurisés (ANTS)
-      </li>
-    </ul>
-  </article>
+// Liste exhaustive des cours (1 entrée = 1 bloc)
+$modules = [
+	// ==================== EiSINe : LP Métiers du numérique ====================
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Intégration web HTML et CSS',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Animation (CSS, SMIL, WAAPI, GSAP)',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Développement Frontend (JavaScript, Vue.js, jQuery)',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Développement Backend (PHP)',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Base de données (Modèle Conceptuel de Données et SQL)',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Frameworks CSS (Bootstrap, Materialize, Skeleton...) & Préprocesseurs (SASS)',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Référencement & SEO',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Systèmes de Gestion de Contenus (WordPress, Joomla, PrestaShop...)',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => "Développement d'extensions pour navigateur & Progressive Web App (PWA)",
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Architecture web, initiation réseaux et sécurité',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Communication digitale & réseaux sociaux',
+	],
+	[
+		'tags' => 'eisine lp-mn',
+		'compo' => 'eisine',
+		'formation' => 'Licence Professionnelle Métiers du numérique',
+		'titre' => 'Travail collaboratif & versionning (Git)',
+	],
 
-  <article class="card span-3 card-c2">
-    <h3>Licence Sciences pour l'Ingénieur</h3>
-    <div class="split-content">
-      <ul>
-        <li>Algorithmique de base (L1)</li>
-        <li>Langage C (L1)</li>
-        <li>Bureautique : Word, Excel, Powerpoint (L1)</li>
-        <li>Langage Java (L2)</li>
-      </ul>
-      <ul>
-        <li>Visual Basic for Application - Excel (L2)</li>
-        <li>Architecture machines et réseaux (L2)</li>
-        <li>Implémentation informatique des méthodes numériques (L3)</li>
-        <li>Modélisation Orienté Objet, Langage C++ (L3)</li>
-      </ul>
-    </div>
-  </article>
+	// ==================== EiSINe : Ingénieur Matériaux et Mécanique ====================
+	[
+		'tags' => 'eisine ing-mm',
+		'compo' => 'eisine',
+		'formation' => 'Ingénieur Matériaux et Mécanique (MM1)',
+		'titre' => 'Informatique',
+	],
+	[
+		'tags' => 'eisine ing-mm',
+		'compo' => 'eisine',
+		'formation' => 'Ingénieur Matériaux et Mécanique (MM2 = 2e année)',
+		'titre' => 'Collecte et filtrage des données',
+	],
+	[
+		'tags' => 'eisine ing-mm',
+		'compo' => 'eisine',
+		'formation' => 'Ingénieur Matériaux et Mécanique (MM3 = 3e année)',
+		'titre' => 'Compétences rédactionnelles',
+	],
 
-  <article class="card span-3 card-c3">
-    <h3>Enseignements Précédents (Université Marie &amp; Louis Pasteur &amp; UTBM)</h3>
-    <div class="split-content">
-      <div>
-        <h4>IUT Nord Franche-Comté, site Montbéliard</h4>
-        <ul>
-          <li>
-            <strong>DUT Réseaux &amp; Télécoms :</strong> Algo (C), Sécurité réseau,
-            IP, Supervision (SNMP)
-          </li>
-          <li>
-            <strong>DUT Métiers du Multimédia et de l'Internet (MMI) :</strong>
-            Architecture des ordinateurs
-          </li>
-        </ul>
-        <h4>UFR STGI (Montbéliard)</h4>
-        <ul>
-          <li>
-            <strong>Master Services et Réseaux en Mobilité :</strong> Simulation
-            Réseau (NS-2) [Cours en anglais]
-          </li>
-          <li>
-            <strong>Master Langues et Commerce Électronique :</strong> Création
-            de site web (HTML, CSS)
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h4>UTBM (Sevenans)</h4>
-        <ul>
-          <li>
-            <strong>Tronc commun :</strong>
-            <ul>
-              <li>Programmation Langage C (Tronc commun)</li>
-              <li>Projets informatiques</li>
-            </ul>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </article>
+	// ==================== EiSINe : Licence Sciences pour l'Ingénieur ====================
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L1 = Licence 1re année)",
+		'titre' => 'Algorithmique de base',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L1 = Licence 1re année)",
+		'titre' => 'Langage C',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L1 = Licence 1re année)",
+		'titre' => 'Bureautique : Word, Excel, PowerPoint',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L2 = Licence 2e année)",
+		'titre' => 'Langage Java',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L2 = Licence 2e année)",
+		'titre' => 'Visual Basic for Application – Excel',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L2 = Licence 2e année)",
+		'titre' => 'Architecture machines et réseaux',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L3 = Licence 3e année)",
+		'titre' => 'Implémentation informatique des méthodes numériques',
+	],
+	[
+		'tags' => 'eisine licence-spi',
+		'compo' => 'eisine',
+		'formation' => "Licence Sciences pour l'Ingénieur (L3 = Licence 3e année)",
+		'titre' => 'Modélisation Orientée Objet, Langage C++',
+	],
+
+	// ==================== EiSINe : Master IC ====================
+	[
+		'tags' => 'eisine master-ic',
+		'compo' => 'eisine',
+		'formation' => 'Master IC (M1 / M2)',
+		'titre' => 'Enseignements Master IC',
+	],
+
+	// ==================== CCI des Ardennes ====================
+	[
+		'tags' => 'cci',
+		'compo' => 'cci',
+		'formation' => "Formation Continue · Personnel de l'Agence Nationale des Titres Sécurisés (ANTS)",
+		'titre' => 'Formation en réseaux et sécurité',
+	],
+
+	// ==================== IUT Nord Franche-Comté (UMLP) ====================
+	[
+		'tags' => 'iut-nfc',
+		'compo' => 'iut-nfc',
+		'formation' => 'DUT Réseaux & Télécoms (Bac+2 · site Montbéliard)',
+		'titre' => 'Algorithmique (C), Sécurité réseau, IP & Supervision (SNMP)',
+	],
+	[
+		'tags' => 'iut-nfc',
+		'compo' => 'iut-nfc',
+		'formation' => "DUT Métiers du Multimédia et de l'Internet (MMI · Bac+2 · site Montbéliard)",
+		'titre' => 'Architecture des ordinateurs',
+	],
+
+	// ==================== UFR STGI (UMLP) ====================
+	[
+		'tags' => 'stgi',
+		'compo' => 'stgi',
+		'formation' => 'Master Services et Réseaux en Mobilité (M2 = Master 2e année · Montbéliard)',
+		'titre' => 'Simulation Réseau (NS-2) [Cours en anglais]',
+	],
+	[
+		'tags' => 'stgi',
+		'compo' => 'stgi',
+		'formation' => 'Master Langues et Commerce Électronique (M1 = Master 1re année · Montbéliard)',
+		'titre' => 'Création de site web (HTML, CSS)',
+	],
+
+	// ==================== UTBM (Sevenans) ====================
+	[
+		'tags' => 'utbm',
+		'compo' => 'utbm',
+		'formation' => 'Tronc commun (1re / 2e année cycle préparatoire ingénieur)',
+		'titre' => 'Programmation Langage C',
+	],
+	[
+		'tags' => 'utbm',
+		'compo' => 'utbm',
+		'formation' => 'Tronc commun (1re / 2e année cycle préparatoire ingénieur)',
+		'titre' => 'Projets informatiques',
+	],
+];
+?>
+<!-- Barre de filtres -->
+<div class="filter-bar" hidden>
+	<div class="filter-row" role="group" aria-label="Filtrer par composante">
+		<span class="filter-label">Composantes</span>
+		<button type="button" class="chip" data-filter="all" aria-pressed="true">Tous les cours</button>
+		<button type="button" class="chip" data-filter="eisine" aria-pressed="false">EiSINe (URCA)</button>
+		<button type="button" class="chip" data-filter="cci" aria-pressed="false">CCI Ardennes</button>
+		<button type="button" class="chip" data-filter="iut-nfc" aria-pressed="false">IUT Nord Franche-Comté (UMLP)</button>
+		<button type="button" class="chip" data-filter="stgi" aria-pressed="false">UFR STGI (UMLP)</button>
+		<button type="button" class="chip" data-filter="utbm" aria-pressed="false">UTBM</button>
+	</div>
+	<div class="filter-row" role="group" aria-label="Filtrer par formation de l'EiSINe">
+		<span class="filter-label">Formations EiSINe</span>
+		<button type="button" class="chip" data-filter="lp-mn" aria-pressed="false">LP Métiers du Numérique</button>
+		<button type="button" class="chip" data-filter="ing-mm" aria-pressed="false">Ingénieur MM</button>
+		<button type="button" class="chip" data-filter="licence-spi" aria-pressed="false">Licence SPI</button>
+		<button type="button" class="chip" data-filter="master-ic" aria-pressed="false">Master IC</button>
+	</div>
+	<p class="filter-count" aria-live="polite"></p>
+</div>
+
+<div class="bento-grid modules">
+	<?php foreach ($modules as $m) : ?>
+		<?php [$classe, $badge] = $composantes[$m['compo']]; ?>
+		<article class="card <?= isset($m['largeur']) ? h($m['largeur']) . ' ' : '' ?><?= $classe ?>" data-tags="<?= h($m['tags']) ?>">
+			<div class="module-head">
+				<span class="badge"><?= h($badge) ?></span>
+				<span class="formation"><?= h($m['formation']) ?></span>
+			</div>
+			<h3><?= h($m['titre']) ?></h3>
+			<?php if (!empty($m['contenu'])) : ?>
+				<p><?= h($m['contenu']) ?></p>
+			<?php endif; ?>
+		</article>
+	<?php endforeach; ?>
 </div>

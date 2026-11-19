@@ -1,6 +1,5 @@
 /* Thème clair / sombre + service worker.
-   Chargé dans <head> (sans defer) 
-   pour appliquer le thème avant l'affichage. */
+   Chargé dans <head> (sans defer) pour appliquer le thème avant l'affichage. */
 (function () {
   const root = document.documentElement;
   const claire = matchMedia("(prefers-color-scheme: light)");
@@ -36,6 +35,42 @@
       } catch (e) {}
     });
   });
+
+  // Filtres de la page Enseignements (un seul filtre actif à la fois)
+  function initFiltres() {
+    const barre = document.querySelector(".filter-bar");
+    if (!barre) return; // pas sur cette page
+    const cartes = document.querySelectorAll(".modules [data-tags]");
+    const boutons = barre.querySelectorAll("[data-filter]");
+    const compteur = barre.querySelector(".filter-count");
+
+    function appliquer(filtre) {
+      let visibles = 0;
+      cartes.forEach((carte) => {
+        // data-tags = liste de mots séparés par des espaces, ex. "eisine lp-mn"
+        const ok =
+          filtre === "all" || carte.dataset.tags.split(" ").includes(filtre);
+        carte.hidden = !ok; // la grille se réorganise toute seule (grid-auto-flow: dense)
+        if (ok) visibles++;
+      });
+      boutons.forEach((b) =>
+        b.setAttribute("aria-pressed", String(b.dataset.filter === filtre)),
+      );
+      const mot = visibles > 1 ? "modules" : "module";
+      compteur.textContent =
+        filtre === "all"
+          ? `${visibles} ${mot}`
+          : `${visibles} ${mot} sur ${cartes.length}`;
+    }
+
+    barre.addEventListener("click", (e) => {
+      const bouton = e.target.closest("[data-filter]");
+      if (bouton) appliquer(bouton.dataset.filter);
+    });
+    barre.hidden = false; // la barre n'apparaît que si JavaScript fonctionne
+    appliquer("all");
+  }
+  document.addEventListener("DOMContentLoaded", initFiltres);
 
   // Service worker (hors ligne)
   if ("serviceWorker" in navigator) {
