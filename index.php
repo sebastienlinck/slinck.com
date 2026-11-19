@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Routeur + gabarit du site.
  * 1. Chaque page est un fichier de pages/ (logique PHP en haut, contenu HTML en dessous).
@@ -44,7 +43,7 @@ $pages = [
 		'h1'    => 'Publications',
 		'h2'    => 'Articles, Conférences & Thèse',
 		'desc'  => 'Articles de revues, conférences internationales et thèse de doctorat de Sébastien Linck, avec liens PDF.',
-		'menu'  => 'Publis',
+		'menu'  => 'Publi',
 		'icon'  => 'books',
 	],
 	'contact' => [
@@ -179,7 +178,7 @@ function h(string $s): string
 				<?php foreach ($pages as $s => $p) : ?>
 					<?php if ($p['menu'] === null) continue; ?>
 					<a href="<?= $s === 'accueil' ? '/' : '/' . $s ?>" class="nav-item<?= $s === $slug ? ' active' : '' ?>" <?= $s === $slug ? 'aria-current="page"' : '' ?>>
-						<img class="icons" src="img/<?= $p['icon'] ?>.svg" alt="" aria-hidden="true"><span><?= h($p['menu']) ?></span>
+						<img src="img/<?= $p['icon'] ?>.svg" alt="" aria-hidden="true"><span><?= h($p['menu']) ?></span>
 					</a>
 				<?php endforeach; ?>
 			</div>

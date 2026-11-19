@@ -4,19 +4,17 @@ $annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
 ?>
 <div class="bento-grid">
   <article class="card hero">
+    <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" width="400" height="400" fetchpriority="high" />
     <div>
-      <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" width="400" height="400" fetchpriority="high" />
-      <div>
-        <p class="hero-title">Former aux métiers du web.</p>
-        <p class="lead">
-          Enseignant en informatique depuis 2007, responsable de la licence
-          professionnelle Métiers du numérique.
-        </p>
-        <div class="chips">
-          <span class="chip">Développement web</span>
-          <span class="chip">Réseaux</span>
-          <span class="chip">Pédagogie</span>
-        </div>
+      <p class="hero-title">Former aux métiers du web.</p>
+      <p class="lead">
+        Enseignant en informatique depuis 2007, responsable de la licence
+        professionnelle Métiers du numérique.
+      </p>
+      <div class="chips">
+        <span class="chip">Développement web</span>
+        <span class="chip">Réseaux</span>
+        <span class="chip">Pédagogie</span>
       </div>
     </div>
   </article>
@@ -62,7 +60,7 @@ $annees = (int) date('Y') - 2007 - ((int) date('n') < 9 ? 1 : 0);
     <b>Contact</b><small>Admissions et questions</small>
   </a>
 
-  <article class="card spanme con-3 card-c3">
+  <article class="card span-3 card-c3">
     <h3>Qui suis-je ?</h3>
     <p>
       Après un parcours académique en ingénierie informatique, ponctué d'un DEA

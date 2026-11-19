@@ -80,7 +80,7 @@
     <h3>Enseignements Précédents (Université Marie &amp; Louis Pasteur &amp; UTBM)</h3>
     <div class="split-content">
       <div>
-        <h4>UFR STGI (Montbéliard)</h4>
+        <h4>IUT Nord Franche-Comté, site Montbéliard</h4>
         <ul>
           <li>
             <strong>DUT Réseaux &amp; Télécoms :</strong> Algo (C), Sécurité réseau,
@@ -90,6 +90,9 @@
             <strong>DUT Métiers du Multimédia et de l'Internet (MMI) :</strong>
             Architecture des ordinateurs
           </li>
+        </ul>
+        <h4>UFR STGI (Montbéliard)</h4>
+        <ul>
           <li>
             <strong>Master Services et Réseaux en Mobilité :</strong> Simulation
             Réseau (NS-2) [Cours en anglais]
