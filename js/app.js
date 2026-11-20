@@ -77,3 +77,14 @@
     addEventListener("load", () => navigator.serviceWorker.register("/sw.js"));
   }
 })();
+
+// Reconstitution des liens mailto: (l'adresse n'est jamais en clair dans le HTML)
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("a[data-mail]").forEach((lien) => {
+    const { u, d } = lien.dataset;
+    if (!u || !d) return;
+    const adresse = `${u}@${d}`;
+    lien.href = `mailto:${adresse}`;
+    lien.textContent = adresse;
+  });
+});

@@ -193,22 +193,37 @@ $captcha = captcha_creer($secret);
       </div>
     </div>
   </article>
-  <article class="card card-c2">
-    <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" loading="lazy" />
-    <h3>Sébastien Linck</h3>
-    <p>
-      EiSINe<br />
-      Campus Sup Ardenne<br />
-      9A rue Claude Chrétien<br />
-      08000 Charleville-Mézières<br />
-    </p>
-    <p>contact(@)slinck(.)com</p>
-    <div class="social-links">
-      <a target="_blank" href="https://www.linkedin.com/in/slinck/" aria-label="LinkedIn">
-        <img src="img/linkedin.svg" alt="LinkedIn" width="40" />
+  <article class="card card-c1 contact-card">
+    <div class="contact-head">
+      <h3>Sébastien Linck</h3>
+      <p class="contact-role">Enseignant en informatique</p>
+    </div>
+
+    <div class="contact-rows">
+      <div class="contact-row">
+        <span class="contact-label">Courriel</span>
+        <!-- Adresse reconstituée par js/app.js (anti-robots) ; sans JavaScript, le lien mène au formulaire -->
+        <a class="mail" href="/contact#formulaire" data-mail data-u="contact" data-d="slinck.com">contact (arobase) slinck.com</a>
+      </div>
+
+      <div class="contact-row">
+        <span class="contact-label">Adresse</span>
+        <address>
+          EiSINe · Campus Sup Ardenne<br />
+          9A rue Claude Chrétien<br />
+          08000 Charleville-Mézières
+        </address>
+      </div>
+    </div>
+
+    <div class="contact-socials">
+      <a class="social-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/in/slinck/">
+        <span class="ic tile-k2"><img src="img/linkedin.svg" alt="" /></span>
+        <span>LinkedIn</span>
       </a>
-      <a target="_blank" href="https://www.researchgate.net/profile/Sebastien-Linck" aria-label="ResearchGate">
-        <img src="img/researchgate.svg" alt="ResearchGate" width="40" />
+      <a class="social-btn" target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Sebastien-Linck">
+        <span class="ic tile-k3"><img src="img/researchgate.svg" alt="" /></span>
+        <span>ResearchGate</span>
       </a>
     </div>
   </article>
