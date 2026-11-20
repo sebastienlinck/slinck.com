@@ -7,10 +7,10 @@
 // Composantes : clé => [classe de couleur de la carte, libellé du badge]
 $composantes = [
 	'eisine'  => ['card-c1', 'EiSINe (URCA)'],
-	'cci'     => ['card-c3', 'CCI des Ardennes'],
-	'iut-nfc' => ['card-c4', 'IUT Nord Franche-Comté (UMLP)'],
-	'stgi'    => ['card-c2', 'UFR STGI (UMLP)'],
-	'utbm'    => ['card-c5', 'UTBM (Sevenans)'],
+	'cci'     => ['card-c2', 'CCI des Ardennes'],
+	'iut-nfc' => ['card-c3', 'IUT Nord Franche-Comté (UMLP)'],
+	'stgi'    => ['card-c4', 'UFR STGI (UMLP)'],
+	'utbm'    => ['card-c5', 'UTBM'],
 ];
 
 // Liste exhaustive des cours (1 entrée = 1 bloc)
@@ -20,7 +20,7 @@ $modules = [
 		'tags' => 'eisine lp-mn',
 		'compo' => 'eisine',
 		'formation' => 'Licence Professionnelle Métiers du numérique',
-		'titre' => 'Intégration web HTML et CSS',
+		'titre' => 'Intégration web (HTML, CSS)',
 	],
 	[
 		'tags' => 'eisine lp-mn',
@@ -50,7 +50,7 @@ $modules = [
 		'tags' => 'eisine lp-mn',
 		'compo' => 'eisine',
 		'formation' => 'Licence Professionnelle Métiers du numérique',
-		'titre' => 'Frameworks CSS (Bootstrap, Materialize, Skeleton...) & Préprocesseurs (SASS)',
+		'titre' => 'Frameworks & Préprocesseurs CSS (SASS)',
 	],
 	[
 		'tags' => 'eisine lp-mn',
@@ -62,19 +62,19 @@ $modules = [
 		'tags' => 'eisine lp-mn',
 		'compo' => 'eisine',
 		'formation' => 'Licence Professionnelle Métiers du numérique',
-		'titre' => 'Systèmes de Gestion de Contenus (WordPress, Joomla, PrestaShop...)',
+		'titre' => 'CMS (WordPress, PrestaShop...)',
 	],
 	[
 		'tags' => 'eisine lp-mn',
 		'compo' => 'eisine',
 		'formation' => 'Licence Professionnelle Métiers du numérique',
-		'titre' => "Développement d'extensions pour navigateur & Progressive Web App (PWA)",
+		'titre' => "Extensions pour navigateur & Progressive Web App (PWA)",
 	],
 	[
 		'tags' => 'eisine lp-mn',
 		'compo' => 'eisine',
 		'formation' => 'Licence Professionnelle Métiers du numérique',
-		'titre' => 'Architecture web, initiation réseaux et sécurité',
+		'titre' => 'Architecture web, réseaux et sécurité',
 	],
 	[
 		'tags' => 'eisine lp-mn',
@@ -94,7 +94,7 @@ $modules = [
 		'tags' => 'eisine ing-mm',
 		'compo' => 'eisine',
 		'formation' => 'Ingénieur Matériaux et Mécanique (MM1)',
-		'titre' => 'Informatique',
+		'titre' => 'Mise à niveau Informatique',
 	],
 	[
 		'tags' => 'eisine ing-mm',
@@ -121,7 +121,7 @@ $modules = [
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
 		'formation' => "Licence Sciences pour l'Ingénieur (L1)",
-		'titre' => 'Algorithmique de base',
+		'titre' => 'Algorithmique',
 	],
 	[
 		'tags' => 'eisine licence-spi',
@@ -133,7 +133,7 @@ $modules = [
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
 		'formation' => "Licence Sciences pour l'Ingénieur (L1)",
-		'titre' => 'Bureautique : Word, Excel, PowerPoint',
+		'titre' => 'Compétences numériques (Bureautique)',
 	],
 	[
 		'tags' => 'eisine licence-spi',
@@ -145,7 +145,7 @@ $modules = [
 		'tags' => 'eisine licence-spi',
 		'compo' => 'eisine',
 		'formation' => "Licence Sciences pour l'Ingénieur (L2)",
-		'titre' => 'Visual Basic for Application – Excel',
+		'titre' => 'Visual Basic for Applications (VBA)',
 	],
 	[
 		'tags' => 'eisine licence-spi',
@@ -178,7 +178,7 @@ $modules = [
 	[
 		'tags' => 'cci',
 		'compo' => 'cci',
-		'formation' => "Formation Continue · Personnel de l'Agence Nationale des Titres Sécurisés (ANTS)",
+		'formation' => "Formation Continue - Agence Nationale des Titres Sécurisés (ANTS)",
 		'titre' => 'Formation en réseaux et sécurité',
 	],
 
@@ -186,8 +186,20 @@ $modules = [
 	[
 		'tags' => 'iut-nfc',
 		'compo' => 'iut-nfc',
-		'formation' => 'DUT Réseaux & Télécoms (Bac+2 · site Montbéliard)',
-		'titre' => 'Algorithmique (C), Sécurité réseau, IP & Supervision (SNMP)',
+		'formation' => 'DUT Réseaux & Télécoms (R&T)',
+		'titre' => 'Algorithmique (C)',
+	],
+	[
+		'tags' => 'iut-nfc',
+		'compo' => 'iut-nfc',
+		'formation' => 'DUT Réseaux & Télécoms (R&T)',
+		'titre' => 'Sécurité réseau',
+	],
+	[
+		'tags' => 'iut-nfc',
+		'compo' => 'iut-nfc',
+		'formation' => 'DUT Réseaux & Télécoms (R&T)',
+		'titre' => 'IP & Supervision (SNMP)',
 	],
 	[
 		'tags' => 'iut-nfc',
@@ -214,13 +226,13 @@ $modules = [
 	[
 		'tags' => 'utbm',
 		'compo' => 'utbm',
-		'formation' => 'Tronc commun (Cycle préparatoire ingénieur)',
+		'formation' => 'Cycle Préparatoire Ingénieur',
 		'titre' => 'Programmation Langage C',
 	],
 	[
 		'tags' => 'utbm',
 		'compo' => 'utbm',
-		'formation' => 'Tronc commun (Cycle préparatoire ingénieur)',
+		'formation' => 'Cycle Préparatoire Ingénieur',
 		'titre' => 'Projets informatiques',
 	],
 ];
