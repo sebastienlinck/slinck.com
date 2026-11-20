@@ -1,7 +1,20 @@
 /* =============================================================
    1. PALETTE « LILAS » : seule section à modifier pour changer de couleurs
-   3 couleurs : k1 violet, k2 menthe, k3 pêche (+ encre sombre pour le texte dessus)
+   5 couleurs : k1 violet, k2 menthe, k3 pêche, k4 bleu ciel, k5 corail
    ============================================================= */
+:root {
+  --k1: #a78bfa;
+  --k2: #5eead4;
+  --k3: #fdba74;
+  --k4: #38bdf8; /* bleu ciel : IUT Nord Franche-Comté (UMLP) */
+  --k5: #fb7185; /* corail : UTBM */
+  --ink: #120e22; /* texte sur les aplats de couleur */
+  --danger: #ff8a8a;
+  --radius: 1.1rem;
+  --gap: 1rem;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
@@ -17,8 +30,10 @@
   --k3-text: #fdba74;
   --k4-text: #38bdf8;
   --k5-text: #fb7185;
+  --tint: color-mix(in srgb, var(--k1) 13%, var(--card));
   --ico: brightness(0) invert(1); /* icônes SVG en blanc */
 }
+
 [data-theme="light"] {
   color-scheme: light;
   --bg: #f6f4fb;
@@ -33,20 +48,8 @@
   --k3-text: #a24a06;
   --k4-text: #0369a1;
   --k5-text: #be123c;
-  --ico: brightness(0); /* icônes SVG en noir */
-}
-:root {
-  --k1: #a78bfa;
-  --k2: #5eead4;
-  --k3: #fdba74;
-  --k4: #38bdf8; /* bleu ciel : Université Marie & Louis Pasteur */
-  --k5: #fb7185; /* corail : UTBM */
-  --ink: #120e22; /* texte sur les aplats de couleur */
-  --danger: #ff8a8a;
   --tint: color-mix(in srgb, var(--k1) 13%, var(--card));
-  --radius: 1.1rem;
-  --gap: 1rem;
-  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --ico: brightness(0); /* icônes SVG en noir */
 }
 
 /* =============================================================
@@ -89,10 +92,9 @@ a {
   outline: 2px solid var(--link);
   outline-offset: 2px;
 }
+[class*="tile-k"]:focus-visible,
 [class*="tile-k"] :focus-visible {
-  outline-color: var(
-    --ink
-  ); /* sur un aplat de couleur, l'anneau violet serait invisible */
+  outline-color: var(--ink); /* sur un aplat de couleur, l'anneau violet serait invisible */
 }
 @media (prefers-reduced-motion: no-preference) {
   .card,
@@ -299,7 +301,7 @@ footer a {
   grid-row: span 2;
 }
 
-/* Variantes de cartes : neutre, neutre relevé, teinté violet. Un point de couleur marque chaque titre. */
+/* Variantes de cartes : neutre, neutre relevé, teinté. Un point de couleur marque chaque titre. */
 .card-c1 {
   --dot: var(--k1);
   --dot-text: var(--k1-text);
@@ -374,6 +376,12 @@ footer a {
 }
 .tile-k3 {
   background: var(--k3);
+}
+.tile-k4 {
+  background: var(--k4);
+}
+.tile-k5 {
+  background: var(--k5);
 }
 [class*="tile-k"] {
   color: var(--ink);
@@ -470,33 +478,43 @@ footer a {
   background: var(--k1);
   color: var(--ink);
 }
+
+/* Tuiles interactives & badges d'icônes (Accueil & Contact) : icône à gauche, texte à droite */
 .tile-link {
   grid-column: span 3;
-  gap: 0.25rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 0.9rem;
   color: var(--text);
 }
 .tile-link:hover {
   background: var(--card2);
 }
+.tile-link .ic {
+  grid-row: span 2; /* l'icône s'étend sur la hauteur du titre + sous-titre éventuel */
+}
 .tile-link b {
   font-size: 1.125rem;
+  line-height: 1.25;
 }
 .tile-link small {
   color: var(--muted);
-  font-size: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.3;
 }
 .ic {
   width: 3rem;
   height: 3rem;
-  border-radius: 0.8rem;
+  border-radius: 0.7rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.75rem;
+  flex: none;
 }
 .ic img {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 2.3rem;
+  height: 2.3rem;
   filter: brightness(0);
 }
 
@@ -525,6 +543,7 @@ footer a {
   flex: 1;
   min-width: 0;
 }
+
 /* --- Carte de coordonnées (page Contact) --- */
 .contact-card {
   align-self: start; /* ne s'étire plus sur toute la hauteur du formulaire */
@@ -571,56 +590,33 @@ footer a {
   overflow-wrap: anywhere;
 }
 .contact-socials {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  padding-top: 0.9rem;
-  border-top: 1px solid var(--line);
-}
-.social-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0.85rem 0.35rem 0.4rem;
-  transition:
-    transform 0.15s,
-    background-color 0.2s;
-}
-.contact-socials {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.75rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
 }
-.social-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.9rem 0.5rem;
+.social-tile {
+  padding: 0.75rem 0.9rem;
   border-radius: 0.9rem;
   background: var(--card2);
-  font-weight: 700;
-  text-align: center;
-  transition:
-    transform 0.2s,
-    background-color 0.2s;
+  column-gap: 0.75rem;
 }
-.social-btn:hover {
-  transform: translateY(-2px);
+.social-tile:hover {
   background: color-mix(in srgb, var(--k1) 20%, var(--card2));
 }
-.social-btn .ic {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.7rem; /* arrondi légèrement plus serré pour suivre l'icône */
-  margin-bottom: 0;
+.social-tile b {
+  font-size: 1rem;
 }
-.social-btn .ic img {
-  width: 2.4rem;
-  height: 2.4rem;
+
+.plain-list {
+  list-style: none;
+  padding: 0;
+}
+.error-code {
+  font-size: 5rem;
+  font-weight: bold;
+  margin: auto;
 }
 
 /* =============================================================
@@ -891,6 +887,7 @@ input[type="submit"]:hover {
   .bento-grid > * {
     grid-column: span 2;
     grid-row: auto;
+    min-width: 0;
   }
   .modules .card {
     grid-column: span 2; /* sinon « .modules .card » (span 3 ou 4) ferait déborder la grille mobile à 2 colonnes */
@@ -898,6 +895,18 @@ input[type="submit"]:hover {
   .stat,
   .tile-link {
     grid-column: span 1;
+  }
+  .tile-link {
+    padding: 1rem;
+    column-gap: 0.65rem;
+  }
+  .tile-link .ic {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .tile-link .ic img {
+    width: 1.9rem;
+    height: 1.9rem;
   }
   .hero {
     flex-direction: column;

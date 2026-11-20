@@ -217,13 +217,13 @@ $captcha = captcha_creer($secret);
     </div>
 
     <div class="contact-socials">
-      <a class="social-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/in/slinck/">
+      <a class="tile-link social-tile" target="_blank" rel="noopener" href="https://www.linkedin.com/in/slinck/">
         <span class="ic tile-k2"><img src="img/linkedin.svg" alt="" /></span>
-        <span>LinkedIn</span>
+        <b>LinkedIn</b>
       </a>
-      <a class="social-btn" target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Sebastien-Linck">
+      <a class="tile-link social-tile" target="_blank" rel="noopener" href="https://www.researchgate.net/profile/Sebastien-Linck">
         <span class="ic tile-k3"><img src="img/researchgate.svg" alt="" /></span>
-        <span>ResearchGate</span>
+        <b>ResearchGate</b>
       </a>
     </div>
   </article>
