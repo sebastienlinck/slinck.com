@@ -1,6 +1,6 @@
 <div class="bento-grid">
   <article class="card card-c1">
-    <div style="font-size: 5rem; font-weight: bold; margin: auto;">404</div>
+    <div class="error-code">404</div>
   </article>
 
   <article class="card span-2 card-c3">
@@ -29,7 +29,7 @@
     <article class="card card-c1">
       <h3>Retrouver mon chemin</h3>
       <p>Ne restez pas dans cette impasse numérique. Voici les accès rapides :</p>
-      <ul style="list-style: none; padding: 0;">
+      <ul class="plain-list">
         <li><a href="enseignements">&rarr; Consulter mes cours</a></li>
         <li><a href="recherche">&rarr; Mes travaux de recherche</a></li>
         <li><a href="publications">&rarr; Liste de mes publications</a></li>

@@ -50,7 +50,7 @@
         // data-tags = liste de mots séparés par des espaces, ex. "eisine lp-mn"
         const ok =
           filtre === "all" || carte.dataset.tags.split(" ").includes(filtre);
-        carte.hidden = !ok; // la grille se réorganise toute seule (grid-auto-flow: dense)
+        carte.hidden = !ok; // la grille se réorganise toute seule
         if (ok) visibles++;
       });
       boutons.forEach((b) =>

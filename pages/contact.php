@@ -193,7 +193,7 @@ $captcha = captcha_creer($secret);
       </div>
     </div>
   </article>
-  <article class="card span-1 card-c2 centered">
+  <article class="card card-c2">
     <img class="img-avatar" src="img/linck.webp" alt="Sébastien Linck" loading="lazy" />
     <h3>Sébastien Linck</h3>
     <p>
@@ -205,10 +205,10 @@ $captcha = captcha_creer($secret);
     <p>contact(@)slinck(.)com</p>
     <div class="social-links">
       <a target="_blank" href="https://www.linkedin.com/in/slinck/" aria-label="LinkedIn">
-        <img src="img/linkedin.svg" alt="LinkedIn" width="40" style="filter: brightness(0) invert(1)" />
+        <img src="img/linkedin.svg" alt="LinkedIn" width="40" />
       </a>
       <a target="_blank" href="https://www.researchgate.net/profile/Sebastien-Linck" aria-label="ResearchGate">
-        <img src="img/researchgate.svg" alt="ResearchGate" width="40" style="filter: brightness(0) invert(1)" />
+        <img src="img/researchgate.svg" alt="ResearchGate" width="40" />
       </a>
     </div>
   </article>
@@ -222,7 +222,7 @@ $captcha = captcha_creer($secret);
     <?php endif; ?>
 
     <form method="post" action="/contact#formulaire">
-      <div style="position: absolute; left: -9999px" aria-hidden="true">
+      <div class="hp" aria-hidden="true">
         <label for="website_check">Ne remplissez pas ce champ si vous êtes humain :</label>
         <input type="text" id="website_check" name="website_check" autocomplete="off" tabindex="-1" value="" />
       </div>

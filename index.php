@@ -143,10 +143,10 @@ function h(string $s): string
 	<meta name="color-scheme" content="dark light">
 	<link rel="manifest" href="slinck.webmanifest">
 	<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
-	<link rel="stylesheet" href="css/style.css?v=<?= @filemtime(__DIR__ . '/css/style.css') ?>">
+	<link rel="stylesheet" href="css/style.min.css?v=<?= @filemtime(__DIR__ . '/css/style.min.css') ?>">
 	<?php /* Mesure d'audience (Matomo) : coller ici le script fourni si vous l'installez */ ?>
 	<?php /* Script volontairement dans <head> et sans "defer" : il applique le thème avant l'affichage (pas de flash) */ ?>
-	<script src="js/app.js?v=<?= @filemtime(__DIR__ . '/js/app.js') ?>"></script>
+	<script src="js/app.min.js?v=<?= @filemtime(__DIR__ . '/js/app.min.js') ?>"></script>
 	<?php if ($slug === 'accueil') : ?>
 		<script type="application/ld+json">
 			{

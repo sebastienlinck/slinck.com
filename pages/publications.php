@@ -70,9 +70,9 @@
         </li>
       </ul>
 
-      <div class="tile-foot">
-        <a class="btn" href="./articles/these_slinck.pdf">Télécharger le manuscrit</a>
-        </div>
+      <div class="cta">
+        <a class="btn" href="./articles/these_slinck.pdf">Télécharger le manuscrit [PDF]</a>
+      </div>
     </article>
   </div>
 
