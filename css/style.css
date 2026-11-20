@@ -94,7 +94,9 @@ a {
 }
 [class*="tile-k"]:focus-visible,
 [class*="tile-k"] :focus-visible {
-  outline-color: var(--ink); /* sur un aplat de couleur, l'anneau violet serait invisible */
+  outline-color: var(
+    --ink
+  ); /* sur un aplat de couleur, l'anneau violet serait invisible */
 }
 @media (prefers-reduced-motion: no-preference) {
   .card,
@@ -491,8 +493,9 @@ footer a {
 .tile-link:hover {
   background: var(--card2);
 }
-.tile-link .ic {
-  grid-row: span 2; /* l'icône s'étend sur la hauteur du titre + sous-titre éventuel */
+/* L'icône ne s'étend sur 2 lignes que s'il y a un sous-titre (<small>) */
+.tile-link:has(small) .ic {
+  grid-row: span 2;
 }
 .tile-link b {
   font-size: 1.125rem;
