@@ -1,17 +1,34 @@
 /* =============================================================
-   1. PALETTE « LILAS » : seule section à modifier pour changer de couleurs
-   5 couleurs : k1 violet, k2 menthe, k3 pêche, k4 bleu ciel, k5 corail
+   1. DESIGN TOKENS : couleurs, échelle d'espacements, typo & rayons
    ============================================================= */
 :root {
-  --k1: #a78bfa;
-  --k2: #5eead4;
-  --k3: #fdba74;
-  --k4: #38bdf8; /* bleu ciel : IUT Nord Franche-Comté (UMLP) */
+  /* Palette « Lilas » */
+  --k1: #a78bfa; /* violet : EiSINe */
+  --k2: #5eead4; /* menthe : UFR STGI */
+  --k3: #fdba74; /* pêche : CCI Ardennes */
+  --k4: #38bdf8; /* bleu ciel : IUT Nord Franche-Comté */
   --k5: #fb7185; /* corail : UTBM */
-  --ink: #120e22; /* texte sur les aplats de couleur */
+  --ink: #120e22;
   --danger: #ff8a8a;
-  --radius: 1.1rem;
-  --gap: 1rem;
+
+  /* Échelle d'espacements (5 niveaux) */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+
+  /* Échelle typographique (plancher strict : 1rem minimum) */
+  --t-base: 1rem;
+  --t-lg: 1.125rem;
+  --t-xl: 1.5rem;
+
+  /* Rayons de bordure */
+  --r-sm: 0.75rem;
+  --r-md: 1.1rem;
+  --r-pill: 999px;
+
+  --gap: var(--s-4);
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -24,14 +41,14 @@
   --text: #eeeaf7;
   --muted: #9b94b3;
   --line: rgba(255, 255, 255, 0.08);
-  --link: #a78bfa; /* violet lisible sur fond sombre */
-  --k1-text: #a78bfa; /* couleurs du texte en gras (<strong>), une par variante de carte */
+  --link: #a78bfa;
+  --k1-text: #a78bfa;
   --k2-text: #5eead4;
   --k3-text: #fdba74;
   --k4-text: #38bdf8;
   --k5-text: #fb7185;
   --tint: color-mix(in srgb, var(--k1) 13%, var(--card));
-  --ico: brightness(0) invert(1); /* icônes SVG en blanc */
+  --ico: brightness(0) invert(1);
 }
 
 [data-theme="light"] {
@@ -42,18 +59,18 @@
   --text: #17142a;
   --muted: #615c80;
   --line: rgba(23, 20, 42, 0.1);
-  --link: #6240d6; /* violet foncé lisible sur fond clair */
-  --k1-text: #6240d6; /* versions foncées : les teintes d'origine sont trop pâles sur fond clair */
+  --link: #6240d6;
+  --k1-text: #6240d6;
   --k2-text: #0d6b64;
   --k3-text: #a24a06;
   --k4-text: #0369a1;
   --k5-text: #be123c;
   --tint: color-mix(in srgb, var(--k1) 13%, var(--card));
-  --ico: brightness(0); /* icônes SVG en noir */
+  --ico: brightness(0);
 }
 
 /* =============================================================
-   2. BASE
+   2. BASE & ACCESSIBILITÉ
    ============================================================= */
 * {
   box-sizing: border-box;
@@ -64,7 +81,6 @@ html {
   scroll-behavior: smooth;
   scrollbar-gutter: stable;
 }
-/* Grands écrans : on agrandit tout le site (tailles en rem) */
 @media (min-width: 1800px) {
   html {
     font-size: 112.5%;
@@ -77,6 +93,7 @@ html {
 }
 body {
   font-family: var(--font);
+  font-size: var(--t-base);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -94,9 +111,7 @@ a {
 }
 [class*="tile-k"]:focus-visible,
 [class*="tile-k"] :focus-visible {
-  outline-color: var(
-    --ink
-  ); /* sur un aplat de couleur, l'anneau violet serait invisible */
+  outline-color: var(--ink);
 }
 @media (prefers-reduced-motion: no-preference) {
   .card,
@@ -123,8 +138,8 @@ a {
 .app-container {
   display: flex;
   min-height: 100vh;
-  padding: 1rem;
-  gap: 1rem;
+  padding: var(--s-4);
+  gap: var(--gap);
   max-width: 110rem;
   margin: 0 auto;
 }
@@ -133,27 +148,27 @@ a {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--gap);
 }
 
 .sidebar {
   width: 7.5rem;
   background: var(--card);
-  border-radius: var(--radius);
+  border-radius: var(--r-md);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: clamp(0.75rem, 2vh, 1.5rem) 0;
-  gap: 0.75rem; /* espace minimal garanti entre logo, liens et bouton de thème */
+  padding: clamp(var(--s-3), 2vh, var(--s-5)) 0;
+  gap: var(--s-3);
   position: sticky;
-  top: 1rem;
+  top: var(--s-4);
   height: calc(100vh - 2rem);
   z-index: 100;
 }
 .logo-area {
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: var(--t-xl);
   color: var(--ink);
   background: var(--k1);
   flex: none;
@@ -162,14 +177,14 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 1.2rem;
+  border-radius: var(--r-md);
 }
 .nav-links {
   display: flex;
   flex-direction: column;
-  gap: clamp(0.25rem, 1.6vh, 1.5rem);
+  gap: clamp(var(--s-1), 1.6vh, var(--s-5));
   align-items: center;
-  min-height: 0; /* sur une fenêtre très basse, les liens défilent au lieu de déborder */
+  min-height: 0;
   overflow-y: auto;
   scrollbar-width: none;
 }
@@ -177,11 +192,11 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.25rem;
+  gap: var(--s-1);
   width: 6.2rem;
-  padding: clamp(0.45rem, 1.4vh, 1rem) 0 clamp(0.4rem, 1.2vh, 0.8rem);
-  border-radius: 1.2rem;
-  font-size: 1rem;
+  padding: clamp(var(--s-2), 1.4vh, var(--s-4)) 0;
+  border-radius: var(--r-md);
+  font-size: var(--t-base);
   font-weight: 600;
   color: var(--muted);
 }
@@ -217,8 +232,8 @@ a {
   position: absolute;
   inset: 0;
   margin: auto;
-  width: 1.4rem;
-  height: 1.4rem;
+  width: var(--t-xl);
+  height: var(--t-xl);
   filter: var(--ico);
   transition: 0.4s;
 }
@@ -244,8 +259,8 @@ header {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: baseline;
-  gap: 0.25rem 1rem;
-  padding: 0.5rem 0 0.25rem;
+  gap: var(--s-1) var(--s-4);
+  padding: var(--s-2) 0 var(--s-1);
 }
 header h1 {
   font-size: clamp(1.8rem, 4vw, 2.4rem);
@@ -253,21 +268,21 @@ header h1 {
   font-weight: 800;
 }
 header h2 {
-  font-size: 1.125rem;
+  font-size: var(--t-lg);
   font-weight: 500;
   color: var(--link);
 }
 
 footer {
   margin-top: auto;
-  padding-top: 1rem;
+  padding-top: var(--s-4);
   border-top: 1px solid var(--line);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.5rem 1.5rem;
+  gap: var(--s-2) var(--s-5);
   color: var(--muted);
-  font-size: 1rem;
+  font-size: var(--t-base);
 }
 footer a {
   color: var(--link);
@@ -275,8 +290,7 @@ footer a {
 }
 
 /* =============================================================
-   4. GRILLE BENTO : 12 colonnes. 1 « unité » (tiers de largeur) = 4 colonnes
-   .card = 1/3 · .span-2 = 2/3 · .span-3 = pleine largeur
+   4. GRILLE BENTO : 12 colonnes
    ============================================================= */
 .bento-grid {
   display: grid;
@@ -287,8 +301,8 @@ footer a {
 .card {
   grid-column: span 4;
   background: var(--card);
-  border-radius: var(--radius);
-  padding: 1.5rem;
+  border-radius: var(--r-md);
+  padding: var(--s-5);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -303,7 +317,7 @@ footer a {
   grid-row: span 2;
 }
 
-/* Variantes de cartes : neutre, neutre relevé, teinté. Un point de couleur marque chaque titre. */
+/* Variantes de cartes par couleur */
 .card-c1 {
   --dot: var(--k1);
   --dot-text: var(--k1-text);
@@ -321,36 +335,39 @@ footer a {
 .card-c4 {
   --dot: var(--k4);
   --dot-text: var(--k4-text);
-  background: color-mix(in srgb, var(--k4) 10%, var(--card));
 }
 .card-c5 {
   --dot: var(--k5);
   --dot-text: var(--k5-text);
-  background: color-mix(in srgb, var(--k5) 10%, var(--card));
 }
+.card-c4,
+.card-c5 {
+  background: color-mix(in srgb, var(--dot) 10%, var(--card));
+}
+
 .card h3 {
-  font-size: 1.125rem;
+  font-size: var(--t-lg);
   font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--s-3);
 }
 [class*="card-c"] h3::before {
   content: "";
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+  width: var(--s-4);
+  height: var(--s-4);
   border-radius: 50%;
   background: var(--dot);
-  margin-right: 0.5rem;
+  margin-right: var(--s-2);
 }
 .card h4 {
-  font-size: 1rem;
+  font-size: var(--t-base);
   font-weight: 700;
   color: var(--link);
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--s-2);
 }
 .card p,
 .card li {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--s-2);
 }
 .card > :last-child,
 .card > ul:last-child > :last-child {
@@ -363,13 +380,11 @@ footer a {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
-
-/* Texte en gras (<strong>) : même couleur que le point de la carte (violet par défaut) */
 .card strong {
   color: var(--dot-text, var(--link));
 }
 
-/* Aplats de couleur (texte sombre) */
+/* Aplats de couleur */
 .tile-k1 {
   background: var(--k1);
 }
@@ -385,11 +400,9 @@ footer a {
 .tile-k5 {
   background: var(--k5);
 }
-[class*="tile-k"] {
-  color: var(--ink);
-}
+[class*="tile-k"],
 [class*="tile-k"] strong {
-  color: inherit; /* sur un aplat de couleur : encre sombre */
+  color: var(--ink);
 }
 
 /* --- Tuiles de la page d'accueil --- */
@@ -398,7 +411,7 @@ footer a {
   grid-row: span 2;
   flex-direction: row;
   align-items: center;
-  gap: 2rem;
+  gap: var(--s-5);
 }
 .hero .img-avatar {
   flex: none;
@@ -410,32 +423,32 @@ footer a {
   font-size: clamp(1.7rem, 2.6vw, 2.6rem);
   font-weight: 800;
   line-height: 1.15;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--s-3);
 }
 .lead {
-  font-size: clamp(1rem, 1.3vw, 1.25rem);
+  font-size: clamp(var(--t-base), 1.3vw, 1.25rem);
   line-height: 1.5;
-  margin-bottom: 1rem;
+  margin-bottom: var(--s-4);
 }
 .chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--s-2);
 }
 .chip {
   background: var(--card2);
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 1rem;
+  padding: var(--s-1) var(--s-3);
+  border-radius: var(--r-pill);
+  font-size: var(--t-base);
   font-weight: 600;
 }
 .tile-accent {
   grid-column: span 6;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--s-3);
 }
 .tile-accent h3 {
-  font-size: 1.5rem;
+  font-size: var(--t-xl);
   line-height: 1.25;
 }
 .tile-k1 .chip {
@@ -445,16 +458,16 @@ footer a {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.75rem 1rem;
+  gap: var(--s-3) var(--s-4);
 }
 .eyebrow {
-  font-size: 1rem;
+  font-size: var(--t-base);
   font-weight: 700;
 }
 .stat {
   grid-column: span 3;
-  justify-content: space-between; /* chiffre en haut, légende en bas : alignés d'une tuile à l'autre */
-  gap: 0.75rem;
+  justify-content: space-between;
+  gap: var(--s-3);
 }
 .stat b {
   font-size: clamp(2.2rem, 4vw, 3rem);
@@ -464,8 +477,8 @@ footer a {
 .btn {
   display: inline-block;
   align-self: flex-start;
-  padding: 0.5rem 1rem;
-  border-radius: 0.8rem;
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-sm);
   font-weight: 700;
   background: var(--ink);
   color: #fff;
@@ -474,42 +487,41 @@ footer a {
   filter: brightness(1.25);
 }
 .cta {
-  margin-top: 1.25rem;
+  margin-top: var(--s-4);
 }
 .cta .btn {
   background: var(--k1);
   color: var(--ink);
 }
 
-/* Tuiles interactives & badges d'icônes (Accueil & Contact) : icône à gauche, texte à droite */
+/* Tuiles interactives & badges d'icônes (Accueil & Contact) */
 .tile-link {
   grid-column: span 3;
   display: grid;
   grid-template-columns: auto 1fr;
   align-items: center;
-  column-gap: 0.9rem;
+  column-gap: var(--s-3);
   color: var(--text);
 }
 .tile-link:hover {
   background: var(--card2);
 }
-/* L'icône ne s'étend sur 2 lignes que s'il y a un sous-titre (<small>) */
 .tile-link:has(small) .ic {
   grid-row: span 2;
 }
 .tile-link b {
-  font-size: 1.125rem;
+  font-size: var(--t-lg);
   line-height: 1.25;
 }
 .tile-link small {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: var(--t-base);
   line-height: 1.3;
 }
 .ic {
   width: 3rem;
   height: 3rem;
-  border-radius: 0.7rem;
+  border-radius: var(--r-sm);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -521,17 +533,15 @@ footer a {
   filter: brightness(0);
 }
 
-/* --- Images --- */
+/* --- Images & mises en page internes --- */
 .img-avatar {
   width: auto;
   height: 100%;
   max-height: 16rem;
   aspect-ratio: 1 / 1;
-  border-radius: var(--radius);
+  border-radius: var(--r-md);
   object-fit: cover;
 }
-
-/* --- Mises en page internes --- */
 .cols-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -549,13 +559,13 @@ footer a {
 
 /* --- Carte de coordonnées (page Contact) --- */
 .contact-card {
-  align-self: start; /* ne s'étire plus sur toute la hauteur du formulaire */
-  gap: 1.15rem;
+  align-self: start;
+  gap: var(--s-4);
 }
 .contact-head h3 {
-  font-size: 1.35rem;
+  font-size: var(--t-xl);
   line-height: 1.25;
-  margin-bottom: 0.2rem;
+  margin-bottom: var(--s-1);
 }
 .contact-role {
   color: var(--muted);
@@ -565,20 +575,18 @@ footer a {
 .contact-rows {
   display: flex;
   flex-direction: column;
-  gap: 0.9rem;
-  padding-top: 1rem;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
   border-top: 1px solid var(--line);
 }
 .contact-row {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: var(--s-1);
 }
 .contact-label {
-  font-size: 0.85rem;
+  font-size: var(--t-base);
   font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
   color: var(--muted);
 }
 .contact-card address {
@@ -595,21 +603,20 @@ footer a {
 .contact-socials {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  padding-top: 1rem;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
   border-top: 1px solid var(--line);
 }
 .social-tile {
-  padding: 0.75rem 0.9rem;
-  border-radius: 0.9rem;
+  padding: var(--s-3);
+  border-radius: var(--r-sm);
   background: var(--card2);
-  column-gap: 0.75rem;
 }
 .social-tile:hover {
   background: color-mix(in srgb, var(--k1) 20%, var(--card2));
 }
 .social-tile b {
-  font-size: 1rem;
+  font-size: var(--t-base);
 }
 
 .plain-list {
@@ -631,19 +638,19 @@ form {
 }
 label {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: var(--t-base);
 }
 input[type="text"],
 input[type="email"],
 textarea {
   width: 100%;
-  padding: 0.75rem 1rem;
-  margin: 0.5rem 0 1rem;
+  padding: var(--s-3) var(--s-4);
+  margin: var(--s-2) 0 var(--s-4);
   font: inherit;
   color: var(--text);
   background: var(--bg);
   border: 1.5px solid var(--line);
-  border-radius: 0.8rem;
+  border-radius: var(--r-sm);
 }
 textarea {
   resize: vertical;
@@ -661,10 +668,10 @@ textarea:focus {
 input[type="submit"] {
   font: inherit;
   font-weight: 700;
-  padding: 1rem 2rem;
-  margin-top: 0.5rem;
+  padding: var(--s-4) var(--s-5);
+  margin-top: var(--s-2);
   border: none;
-  border-radius: 0.8rem;
+  border-radius: var(--r-sm);
   background: var(--k1);
   color: var(--ink);
   cursor: pointer;
@@ -673,18 +680,17 @@ input[type="submit"]:hover {
   filter: brightness(1.1);
 }
 .hp {
-  /* champ piège anti-robot : hors écran, invisible pour les humains */
   position: absolute;
   left: -9999px;
 }
 .captcha-container {
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--s-2);
 }
 .captcha-question {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
   font-weight: 700;
 }
 #captcha {
@@ -693,9 +699,9 @@ input[type="submit"]:hover {
   text-align: center;
 }
 .alerte {
-  padding: 1rem;
-  border-radius: 0.8rem;
-  margin-bottom: 1rem;
+  padding: var(--s-4);
+  border-radius: var(--r-sm);
+  margin-bottom: var(--s-4);
   text-align: center;
   font-weight: 700;
   color: var(--ink);
@@ -710,47 +716,35 @@ input[type="submit"]:hover {
 /* =============================================================
    6. PAGE ENSEIGNEMENTS : barre de filtres et blocs « module »
    ============================================================= */
-/* Un bloc masqué par le filtre doit vraiment disparaître : sans cette règle, « display: flex » de .card l'emporte sur l'attribut hidden */
 .card[hidden],
 .filter-bar[hidden] {
   display: none;
 }
-
-/* Grille plus dense pour les modules : 4 blocs par ligne sur grand écran */
 .modules .card {
   grid-column: span 3;
-  padding: 1.25rem;
+  padding: var(--s-4);
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: var(--s-3);
+}
+.modules [class*="card-c"] {
+  background: color-mix(in srgb, var(--dot) 10%, var(--card));
 }
 
-/* Dans cette page, chaque composante colore ses blocs d'un fond léger */
-.modules .card-c1 {
-  background: color-mix(in srgb, var(--k1) 10%, var(--card));
-}
-.modules .card-c2 {
-  background: color-mix(in srgb, var(--k2) 10%, var(--card));
-}
-.modules .card-c3 {
-  background: color-mix(in srgb, var(--k3) 10%, var(--card));
-}
-
-/* Barre de filtres : deux rangées de boutons (réutilise .chip) */
 .filter-bar {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--s-2);
 }
 .filter-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--s-2);
 }
 .filter-label {
   color: var(--muted);
   font-weight: 600;
-  margin-right: 0.25rem;
+  margin-right: var(--s-1);
 }
 .filter-bar .chip {
   border: 0;
@@ -758,7 +752,7 @@ input[type="submit"]:hover {
   font-weight: 600;
   color: var(--text);
   cursor: pointer;
-  padding: 0.5rem 1rem; /* zone tactile confortable (≈ 42 px de haut) */
+  padding: var(--s-2) var(--s-4);
 }
 .filter-bar .chip:hover {
   background: color-mix(in srgb, var(--k1) 25%, var(--card2));
@@ -771,47 +765,41 @@ input[type="submit"]:hover {
   color: var(--muted);
 }
 
-/* En-tête institutionnel compact : badge composante + niveau côte à côte */
 .module-top {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: 0.5rem;
+  gap: var(--s-2);
 }
 .badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 999px;
-  font-size: 1rem;
+  padding: var(--s-1) var(--s-3);
+  border-radius: var(--r-pill);
+  font-size: var(--t-base);
   font-weight: 700;
-  background: var(--dot); /* couleur de la composante */
+  background: var(--dot);
   color: var(--ink);
 }
 .niveau-tag {
-  font-size: 1rem;
+  font-size: var(--t-base);
   font-weight: 700;
   color: var(--dot-text);
   white-space: nowrap;
 }
-
-/* Titre du cours au centre */
 .modules .card h3 {
-  font-size: 1.125rem;
+  font-size: var(--t-lg);
   line-height: 1.35;
   margin: 0;
 }
-
-/* Intitulé complet de la formation calé en bas en discret */
 .formation {
-  font-size: 1rem;
+  font-size: var(--t-base);
   line-height: 1.35;
   color: var(--muted);
   border-top: 1px solid var(--line);
-  padding-top: 0.5rem;
+  padding-top: var(--s-2);
   margin-top: auto;
 }
 
-/* Les blocs qui (ré)apparaissent s'affichent en douceur */
 @media (prefers-reduced-motion: no-preference) {
   .modules .card {
     animation: apparait 0.25s ease;
@@ -823,8 +811,6 @@ input[type="submit"]:hover {
     transform: scale(0.97);
   }
 }
-
-/* Écrans intermédiaires (ordinateurs portables / tablettes paysage) : 3 blocs par ligne */
 @media (max-width: 1200px) {
   .modules .card {
     grid-column: span 4;
@@ -837,7 +823,7 @@ input[type="submit"]:hover {
 @media (max-width: 900px) {
   .app-container {
     flex-direction: column;
-    padding: 1rem;
+    padding: var(--s-4);
     padding-bottom: 5.5rem;
   }
   .sidebar {
@@ -851,8 +837,8 @@ input[type="submit"]:hover {
     grid-template-columns: repeat(6, 1fr);
     align-items: center;
     justify-items: center;
-    padding: 0 0.25rem;
-    border-radius: 1rem 1rem 0 0;
+    padding: 0 var(--s-1);
+    border-radius: var(--r-md) var(--r-md) 0 0;
     border-top: 1px solid var(--line);
   }
   .logo-area {
@@ -875,7 +861,6 @@ input[type="submit"]:hover {
     width: 2.8rem;
     height: 2.8rem;
   }
-  /* libellés masqués visuellement mais lus par les lecteurs d'écran */
   .nav-item span {
     position: absolute;
     width: 1px;
@@ -893,15 +878,15 @@ input[type="submit"]:hover {
     min-width: 0;
   }
   .modules .card {
-    grid-column: span 2; /* sinon « .modules .card » (span 3 ou 4) ferait déborder la grille mobile à 2 colonnes */
+    grid-column: span 2;
   }
   .stat,
   .tile-link {
     grid-column: span 1;
   }
   .tile-link {
-    padding: 1rem;
-    column-gap: 0.65rem;
+    padding: var(--s-4);
+    column-gap: var(--s-2);
   }
   .tile-link .ic {
     width: 2.5rem;
@@ -921,7 +906,6 @@ input[type="submit"]:hover {
   .cols-2 {
     grid-template-columns: 1fr;
   }
-  /* Filtres : chaque rangée défile au doigt, sans élargir la page */
   .filter-row {
     flex-wrap: nowrap;
     overflow-x: auto;
